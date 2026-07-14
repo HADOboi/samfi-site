@@ -1,0 +1,9 @@
+import { Link, useLocation } from 'react-router-dom'
+import { ArrowUpRight, Menu, X } from 'lucide-react'
+import { useEffect, useState } from 'react'
+
+export function Header(){const [open,setOpen]=useState(false);const [compact,setCompact]=useState(false);const {pathname}=useLocation();useEffect(()=>{const onScroll=()=>setCompact(window.scrollY>80);onScroll();window.addEventListener('scroll',onScroll);return()=>window.removeEventListener('scroll',onScroll)},[]);return <header className={`site-header ${compact?'compact':''}`}><Link className="wordmark" to="/" onClick={()=>setOpen(false)}>SAMFI<span>.</span></Link><nav className={open?'open':''}>{[['/consultancy','Consultancy'],['/empowerment','Empowerment'],['/training','Training'],['/solutions','Digital']].map(([to,name])=><Link className={pathname===to?'active':''} to={to} onClick={()=>setOpen(false)} key={to}>{name}</Link>)}<a className="nav-contact" href="#contact" onClick={()=>setOpen(false)}>Contact <ArrowUpRight size={15}/></a></nav><button className="menu" onClick={()=>setOpen(!open)} aria-label="Menu">{open?<X/>:<Menu/>}</button></header>}
+
+export function SocialDock(){return <aside className="social-dock" aria-label="Social media links"><a href="#" aria-label="YouTube"><b>YT</b></a><a href="#" aria-label="Instagram"><b>IG</b></a><a href="#" aria-label="LinkedIn"><b>in</b></a></aside>}
+
+export function Footer(){return <footer id="contact"><div className="contact-card"><div><p className="eyebrow">Let’s make room for what is next</p><h2>Ready to <em>clean<br/>and elevate?</em></h2></div><div className="contact-action"><p>Tell us where you are today. We’ll start with a thoughtful conversation.</p><a className="contact-button" href="mailto:hello@samfi.co">hello@samfi.co <ArrowUpRight size={17}/></a></div></div><div className="footer-bottom"><span className="wordmark">SAMFI<span>.</span></span><span>© 2026 SAMFI. All rights reserved.</span><span>Clean and elevate.</span></div></footer>}
