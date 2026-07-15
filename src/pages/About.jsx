@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { Header, Footer, SocialDock } from "../components/Layout";
 import Reveal from "../components/Reveal";
 
@@ -7,7 +8,12 @@ export default function About() {
       <Header />
       <SocialDock />
 
-      <section className="page-hero">
+      <motion.section
+        className="page-hero"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.45 }}
+      >
         <div>
           <p className="eyebrow">ABOUT SAMFI</p>
 
@@ -25,7 +31,7 @@ export default function About() {
         </div>
 
         <div className="hero-mark" />
-      </section>
+      </motion.section>
 
       <section className="detail-intro">
         <Reveal>
@@ -55,11 +61,11 @@ export default function About() {
       </section>
 
       <section className="page-visual-section">
-        <div className="page-visual-placeholder about-visual-placeholder">
+        <Reveal className="page-visual-placeholder about-visual-placeholder">
           <span>IMAGE AREA</span>
           <strong>People, purpose and progress.</strong>
           <small>Suggested format: wide team, workshop or community photograph</small>
-        </div>
+        </Reveal>
       </section>
 
       <Footer />
