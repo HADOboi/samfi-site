@@ -63,50 +63,63 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
   return (
-    <header className={`site-header ${compact ? "compact" : ""}`}>
-      <Link className="brand-logo" to="/" onClick={(event) => { event.preventDefault(); navigateHome(); }} aria-label="SAMFI home">
-        <img src={logo} alt="SAMFI — to empower your brain and business" />
-      </Link>
-      <nav className={open ? "open" : ""}>
-        <button
-          type="button"
-          className={`nav-link ${pathname === "/" ? "active" : ""}`}
-          onClick={navigateHome}
-        >
-          Home
-        </button>
-
-        <Link
-          to="/about"
-          className={pathname === "/about" ? "active" : ""}
-          onClick={() => setOpen(false)}
-        >
-          About Us
+    <header className={`site-header ${compact ? "compact" : ""} ${open ? "menu-open" : ""}`}>
+      <div className="header-container">
+        <Link className="brand-logo" to="/" onClick={(event) => { event.preventDefault(); navigateHome(); }} aria-label="SAMFI home">
+          <img src={logo} alt="SAMFI — to empower your brain and business" />
         </Link>
+        
+        <nav className={`header-nav ${open ? "open" : ""}`}>
+          <button
+            type="button"
+            className={`nav-link ${pathname === "/" ? "active" : ""}`}
+            onClick={(e) => { setOpen(false); navigateHome(e); }}
+          >
+            Home
+          </button>
 
-        <a href="/#sectors" onClick={navigateToSectors}>
-          Services
-        </a>
+          <Link
+            to="/about"
+            className={pathname === "/about" ? "active" : ""}
+            onClick={() => setOpen(false)}
+          >
+            About Us
+          </Link>
 
-        <Link
-          to="/gallery"
-          className={pathname === "/gallery" ? "active" : ""}
-          onClick={() => setOpen(false)}
-        >
-          Gallery
-        </Link>
+          <a href="/#sectors" onClick={(e) => { setOpen(false); navigateToSectors(e); }}>
+            Services
+          </a>
 
-        <a
-          className="nav-contact"
-          href="#contact"
-          onClick={navigateToContact}
-        >
-          Contact <ArrowUpRight size={15} />
-        </a>
-      </nav>
-      <button className="menu" onClick={() => setOpen(!open)} aria-label="Menu">
-        {open ? <X /> : <Menu />}
-      </button>
+          <Link
+            to="/gallery"
+            className={pathname === "/gallery" ? "active" : ""}
+            onClick={() => setOpen(false)}
+          >
+            Gallery
+          </Link>
+
+          <a
+            className="nav-contact mobile-only-contact"
+            href="#contact"
+            onClick={(e) => { setOpen(false); navigateToContact(e); }}
+          >
+            Contact <ArrowUpRight size={15} />
+          </a>
+        </nav>
+
+        <div className="header-actions">
+          <a
+            className="nav-contact desktop-only-contact"
+            href="#contact"
+            onClick={(e) => { setOpen(false); navigateToContact(e); }}
+          >
+            Contact <ArrowUpRight size={15} />
+          </a>
+          <button className="menu" onClick={() => setOpen(!open)} aria-label="Menu">
+            {open ? <X /> : <Menu />}
+          </button>
+        </div>
+      </div>
     </header>
   );
 }
