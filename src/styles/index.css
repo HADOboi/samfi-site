@@ -58,6 +58,29 @@ a {
     color: var(--clay)
 }
 
+.brand-logo {
+    display: flex;
+    align-items: center;
+    width: 128px;
+    height: 56px;
+    overflow: hidden;
+}
+
+.brand-logo img,
+.footer-logo {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+}
+
+.footer-logo {
+    width: 118px;
+    height: 52px;
+    mix-blend-mode: normal;
+}
+
 nav {
     display: flex;
     align-items: center;
@@ -84,6 +107,21 @@ nav>a.active {
     padding-bottom: 3px
 }
 
+.nav-link{
+    background:none;
+    border:none;
+    padding:8px 11px;
+    margin:0;
+    font:inherit;
+    color:inherit;
+    cursor:pointer;
+    border-radius:999px;
+}
+
+em {
+    font-style: normal;
+}
+
 .menu {
     display: none;
     border: 0;
@@ -103,15 +141,19 @@ nav>a.active {
     min-height: calc(100vh - 88px);
     padding: 10vh 4.5vw 5vh;
     display: grid;
-    grid-template-columns: 1fr 190px;
+    grid-template-columns: 58% 42%;
     position: relative;
     overflow: hidden;
-    background: radial-gradient(circle at 83% 23%, rgba(199, 92, 66, .22), transparent 18%), radial-gradient(circle at 74% 70%, rgba(207, 159, 67, .19), transparent 25%), var(--paper)
+    background:
+        radial-gradient(circle at 78% 26%, rgba(243, 184, 96, .24), transparent 18%),
+        radial-gradient(circle at 93% 78%, rgba(145, 166, 129, .24), transparent 25%),
+        linear-gradient(112deg, #f7f1e6 0%, #ead7ad 45%, #487067 66%, #173e3b 100%);
 }
 
 .hero-intro {
     position: relative;
-    z-index: 1
+    z-index: 1;
+    max-width: 660px
 }
 
 .hero-intro h1,
@@ -162,11 +204,12 @@ h2 em {
 
 .hero-orbit {
     position: absolute;
-    width: min(44vw, 600px);
+    width: min(38vw, 560px);
     aspect-ratio: 1;
-    right: 5vw;
-    top: 8%;
-    border: 1px solid rgba(20, 33, 31, .18);
+    right: 3vw;
+    top: 11%;
+    z-index: 1;
+    border: 1px solid rgba(255, 255, 255, .45);
     border-radius: 50%;
     animation: orbit 16s linear infinite
 }
@@ -183,25 +226,25 @@ h2 em {
 .hero-orbit:before {
     width: 28%;
     aspect-ratio: 1;
-    background: var(--clay);
+    background: #f2b860;
     top: 8%;
     right: 5%;
-    box-shadow: 0 0 0 24px rgba(199, 92, 66, .12)
+    box-shadow: 0 0 0 24px rgba(242, 184, 96, .12)
 }
 
 .hero-orbit:after {
     width: 15%;
     aspect-ratio: 1;
-    background: var(--blue);
+    background: #b7d0c2;
     bottom: 8%;
     left: 1%;
-    box-shadow: 0 0 0 18px rgba(84, 122, 140, .14)
+    box-shadow: 0 0 0 18px rgba(183, 208, 194, .14)
 }
 
 .hero-orbit i:nth-child(1) {
     width: 12%;
     aspect-ratio: 1;
-    background: var(--ochre);
+    background: #f7f1e6;
     left: 8%;
     top: 21%
 }
@@ -209,14 +252,14 @@ h2 em {
 .hero-orbit i:nth-child(2) {
     width: 7%;
     aspect-ratio: 1;
-    background: var(--sage);
+    background: #e0a34f;
     right: 18%;
     bottom: 17%
 }
 
 .hero-orbit i:nth-child(3) {
     inset: 17%;
-    border: 1px dashed rgba(20, 33, 31, .23)
+    border: 1px dashed rgba(255, 255, 255, .5)
 }
 
 @keyframes orbit {
@@ -227,7 +270,9 @@ h2 em {
 
 .sectors {
     padding: 110px 4.5vw 130px;
-    background: linear-gradient(115deg, #e8e6df 45%, #e2e8e3)
+    background:
+        radial-gradient(circle at 83% 10%, rgba(242, 184, 96, .18), transparent 20%),
+        linear-gradient(112deg, #ead7ad 0%, #d4c78c 45%, #8fac91 74%, #487067 100%)
 }
 
 .section-head {
@@ -458,7 +503,11 @@ footer {
     margin-top: 105px;
     padding-top: 19px;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    text-align: center;
     font: 10px var(--mono);
     color: #aab5af
 }
@@ -466,6 +515,25 @@ footer {
 .footer-bottom .wordmark {
     font: 600 19px var(--sans);
     color: #f4f1e9
+}
+
+main:has(.hero) .manifesto {
+    background: linear-gradient(124deg, #51776e 0%, #234945 72%, #173e3b 100%);
+    color: #f7f1e6;
+}
+
+main:has(.hero) .manifesto .eyebrow,
+main:has(.hero) .manifesto-copy p {
+    color: #d9e4d8;
+}
+
+main:has(.hero) .manifesto-copy a {
+    border-color: #f7f1e6;
+}
+
+main:has(.hero) .principles,
+main:has(.hero) footer {
+    background: #173e3b;
 }
 
 .page-hero {
@@ -913,7 +981,8 @@ footer {
     .hero-orbit {
         width: 62vw;
         right: -16vw;
-        top: 13%
+        top: auto;
+        bottom: 4%
     }
 
     .sectors {
@@ -1155,7 +1224,7 @@ main {
     gap: 7px
 }
 
-.social-dock a {
+.social-dock button {
     width: 36px;
     height: 36px;
     border-radius: 50%;
@@ -1164,23 +1233,27 @@ main {
     background: rgba(243, 241, 236, .9);
     border: 1px solid var(--line);
     box-shadow: 0 5px 14px rgba(20, 33, 31, .09);
-    transition: transform .25s, background .25s
+    transition: transform .25s, background .25s;
+    color: var(--ink);
+    cursor: pointer;
+    padding: 0;
+    font-size: 15px
 }
 
-.social-dock a:hover {
+.social-dock button:hover {
     transform: translateX(-4px);
     background: var(--clay);
     color: #fff;
     border-color: var(--clay)
 }
 
-.solutions-page .social-dock a {
+.solutions-page .social-dock button {
     background: #0b2639;
     border-color: #2a5066;
     color: #eaf3f2
 }
 
-.solutions-page .social-dock a:hover {
+.solutions-page .social-dock button:hover {
     background: #61e4c5;
     color: #061321
 }
@@ -1430,6 +1503,41 @@ footer {
     color: #b5c2ba
 }
 
+.page-visual-section {
+    padding: 0 9vw 130px;
+    background: linear-gradient(124deg, #f7f1e6 0%, #ecdfc3 62%, #d7e2d5 100%);
+}
+
+.page-visual-placeholder {
+    min-height: min(44vw, 540px);
+    padding: 34px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    border: 1px dashed #66847c;
+    background:
+        linear-gradient(125deg, rgba(23, 62, 59, .08), rgba(242, 184, 96, .12)),
+        repeating-linear-gradient(135deg, rgba(20, 33, 31, .05), rgba(20, 33, 31, .05) 12px, transparent 12px, transparent 24px);
+    color: #173e3b;
+}
+
+.page-visual-placeholder span,
+.page-visual-placeholder small {
+    font: 11px var(--mono);
+    letter-spacing: .08em;
+}
+
+.page-visual-placeholder strong {
+    max-width: 560px;
+    font: normal clamp(40px, 5vw, 72px)/.9 var(--display);
+    letter-spacing: -.045em;
+    margin: 16px 0;
+}
+
+.page-visual-placeholder small {
+    color: #4f675e;
+}
+
 @media(max-width:760px) {
     main {
         padding-top: 72px
@@ -1450,7 +1558,7 @@ footer {
         flex-direction: row
     }
 
-    .social-dock a {
+    .social-dock button {
         width: 34px;
         height: 34px
     }
@@ -1501,11 +1609,20 @@ footer {
     .case-image-placeholder {
         min-height: 190px
     }
+
+    .page-visual-section {
+        padding: 0 6vw 80px;
+    }
+
+    .page-visual-placeholder {
+        min-height: 330px;
+        padding: 24px;
+    }
 }
 
 /* Header contrast and hero text readability */
 .site-header {
-    background: rgba(243, 241, 236, .78);
+    background: rgba(247, 241, 230, .84);
     backdrop-filter: blur(18px) saturate(145%);
     -webkit-backdrop-filter: blur(18px) saturate(145%)
 }
@@ -1514,7 +1631,8 @@ footer {
     gap: 10px
 }
 
-.site-header nav>a:not(.nav-contact) {
+.site-header nav>a:not(.nav-contact),
+.site-header .nav-link {
     opacity: 1;
     font-weight: 600;
     padding: 8px 11px;
@@ -1524,7 +1642,9 @@ footer {
 }
 
 .site-header nav>a:hover,
-.site-header nav>a.active {
+.site-header nav>a.active,
+.site-header .nav-link:hover,
+.site-header .nav-link.active {
     opacity: 1;
     color: var(--ink);
     background: rgba(20, 33, 31, .11);
@@ -1542,19 +1662,22 @@ footer {
 }
 
 .site-header.compact {
-    background: rgba(248, 247, 242, .9)
+    background: rgba(247, 241, 230, .94)
 }
 
 .solutions-page .site-header {
     background: rgba(6, 19, 33, .78)
 }
 
-.solutions-page .site-header nav>a:not(.nav-contact) {
+.solutions-page .site-header nav>a:not(.nav-contact),
+.solutions-page .site-header .nav-link {
     color: #dcebe8
 }
 
 .solutions-page .site-header nav>a:hover,
-.solutions-page .site-header nav>a.active {
+.solutions-page .site-header nav>a.active,
+.solutions-page .site-header .nav-link:hover,
+.solutions-page .site-header .nav-link.active {
     background: rgba(97, 228, 197, .15);
     color: #61e4c5
 }
@@ -1564,6 +1687,10 @@ footer {
     color: #061321
 }
 
+.solutions-page .brand-logo img {
+    mix-blend-mode: normal;
+}
+
 .solutions-page .site-header.compact {
     background: rgba(6, 19, 33, .9)
 }
@@ -1571,5 +1698,234 @@ footer {
 .hero-intro h1 em {
     position: relative;
     z-index: 2;
-    text-shadow: 0 0 10px rgba(243, 241, 236, .96), 0 0 22px rgba(243, 241, 236, .78), 0 0 38px rgba(243, 241, 236, .48)
+    text-shadow: none
+}
+
+/* Shared gold-and-forest system for service and gallery pages */
+.about-page .page-hero,
+.gallery-page .page-hero,
+.sector-page .page-hero {
+    background:
+        radial-gradient(circle at 80% 28%, rgba(242, 184, 96, .22), transparent 20%),
+        linear-gradient(112deg, #f0dfbb 0%, #d4bd7b 43%, #487067 70%, #173e3b 100%);
+    color: var(--ink);
+}
+
+.about-page .page-hero .eyebrow,
+.gallery-page .page-hero .eyebrow,
+.sector-page .page-hero .eyebrow {
+    color: #36594f;
+}
+
+.about-page .page-hero>div>p:last-child,
+.gallery-page .page-hero>div>p:last-child,
+.sector-page .page-hero>div>p:last-child {
+    color: #334d47;
+}
+
+.about-page .hero-mark,
+.gallery-page .hero-mark,
+.sector-page .hero-mark {
+    border-color: rgba(23, 62, 59, .45);
+    color: #173e3b;
+}
+
+.about-page .detail-intro,
+.gallery-page .detail-intro,
+.sector-page .sector-story {
+    background: linear-gradient(124deg, #f7f1e6 0%, #ecdfc3 62%, #d7e2d5 100%);
+}
+
+.sector-page .offerings {
+    background: linear-gradient(112deg, #ecdbb4 0%, #d5c58e 48%, #a4ba9d 100%);
+}
+
+.sector-page .case-strip {
+    background: linear-gradient(124deg, #234945 0%, #173e3b 100%);
+}
+
+.solutions-page {
+    background: #173e3b;
+}
+
+.solutions-page .site-header,
+.solutions-page .site-header.compact {
+    background: rgba(23, 62, 59, .88);
+    border-color: rgba(242, 184, 96, .35);
+}
+
+.solutions-hero {
+    background:
+        radial-gradient(circle at 80% 24%, rgba(242, 184, 96, .23), transparent 22%),
+        radial-gradient(circle at 20% 88%, rgba(145, 166, 129, .22), transparent 28%),
+        linear-gradient(118deg, #234945 0%, #173e3b 65%, #102e2b 100%);
+}
+
+.solutions-page .eyebrow,
+.solutions-page .site-header nav>a:hover,
+.solutions-page .site-header nav>a.active,
+.solutions-page .site-header .nav-link:hover,
+.solutions-page .site-header .nav-link.active {
+    color: #f2b860;
+}
+
+.solutions-page .site-header .nav-contact,
+.solution-button {
+    background: #f2b860;
+    color: #173e3b;
+}
+
+.code-window {
+    border-color: #b78c44;
+    background: #173e3b;
+    box-shadow: 20px 20px 0 #315d54;
+    transform: none;
+}
+
+.window-bar {
+    border-color: #b78c44;
+    color: #d7e2d5;
+}
+
+.code-accent,
+.solution-card span,
+.solution-card svg {
+    color: #f2b860;
+}
+
+.solution-services {
+    background: linear-gradient(120deg, #f7f1e6 0%, #ecdfc3 62%, #d7e2d5 100%);
+    color: #173e3b;
+}
+
+.solution-heading>p:last-child {
+    color: #405d55;
+}
+
+.solution-card,
+.solution-card:nth-child(2),
+.solution-card:nth-child(3),
+.solution-card:hover {
+    background: #234945;
+}
+
+.solution-card:nth-child(2) {
+    background: #315d54;
+}
+
+.solution-card:nth-child(3) {
+    background: #3f6f61;
+}
+
+.build-strip {
+    background: linear-gradient(118deg, #d9c27d 0%, #a8b882 48%, #51776e 100%);
+    color: #173e3b;
+}
+
+.build-strip h2 em {
+    color: #234945;
+}
+
+/* Improve label and caption contrast on the service-page gradients. */
+.sector-page .sector-story .eyebrow,
+.sector-page .offerings .eyebrow,
+.sector-page .offerings .offering span,
+.sector-page .sector-image-placeholder span,
+.sector-page .sector-image-placeholder small {
+    color: #24463d;
+}
+
+.sector-page .case-strip .eyebrow,
+.sector-page .case-image-placeholder small {
+    color: #d8e4d5;
+}
+
+/* Sector-colour hero panels need light foreground text. */
+.sector-page.clay .page-hero,
+.sector-page.sage .page-hero,
+.sector-page.ochre .page-hero {
+    color: #f7f1e6;
+}
+
+.sector-page.clay .page-hero .eyebrow,
+.sector-page.sage .page-hero .eyebrow,
+.sector-page.ochre .page-hero .eyebrow {
+    color: #f6d38d;
+}
+
+.sector-page.clay .page-hero>div>p:last-child,
+.sector-page.sage .page-hero>div>p:last-child,
+.sector-page.ochre .page-hero>div>p:last-child {
+    color: #f1f4ed;
+}
+
+.sector-page.clay .hero-mark,
+.sector-page.sage .hero-mark,
+.sector-page.ochre .hero-mark {
+    color: #f7f1e6;
+    border-color: rgba(247, 241, 230, .5);
+}
+
+/* Solutions retains its navy product identity, with the newer gold accents. */
+.solutions-page {
+    background: #061321;
+}
+
+.solutions-page .site-header,
+.solutions-page .site-header.compact,
+.solutions-hero,
+.code-window {
+    background: #061321;
+}
+
+.solutions-page .site-header {
+    border-color: #214052;
+}
+
+.solutions-hero {
+    background:
+        radial-gradient(circle at 80% 24%, rgba(242, 184, 96, .2), transparent 22%),
+        radial-gradient(circle at 20% 88%, rgba(19, 93, 105, .28), transparent 28%),
+        #061321;
+}
+
+.code-window {
+    border-color: #2a5066;
+    box-shadow: 20px 20px 0 #11334a;
+}
+
+.window-bar {
+    border-color: #2a5066;
+}
+
+.solution-card,
+.solution-card:nth-child(2),
+.solution-card:nth-child(3),
+.solution-card:hover {
+    background: #0b2639;
+}
+
+.solution-card:nth-child(2) {
+    background: #135d69;
+}
+
+.solution-card:nth-child(3) {
+    background: #263d8d;
+}
+
+@media(max-width:760px) {
+    .site-header nav {
+        border-radius: 0 0 22px 22px;
+    }
+
+    .site-header.compact nav {
+        top: 57px;
+        border: 1px solid var(--line);
+        border-top: 0;
+        border-radius: 0 0 24px 24px;
+    }
+
+    .solutions-page .site-header.compact nav {
+        border-color: #214052;
+    }
 }
