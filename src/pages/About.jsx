@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Header, Footer, SocialDock } from "../components/Layout";
 import Reveal from "../components/Reveal";
+import { BrandName } from "../components/BrandName";
 
 export default function About() {
   return (
@@ -15,7 +16,7 @@ export default function About() {
         transition={{ duration: 0.45 }}
       >
         <div>
-          <p className="eyebrow">ABOUT SAMFI</p>
+          <p className="eyebrow">ABOUT <BrandName /></p>
 
           <h1>
             To empower
@@ -24,7 +25,7 @@ export default function About() {
           </h1>
 
           <p>
-            SAMFI exists to help people and organisations think better,
+            <BrandName /> exists to help people and organisations think better,
             grow stronger and create lasting impact through consultancy,
             learning and technology.
           </p>
@@ -47,7 +48,7 @@ export default function About() {
         <Reveal>
           <div>
             <p>
-              SAMFI is a multidisciplinary organisation focused on empowering
+              <BrandName /> is a multidisciplinary organisation focused on empowering
               individuals, professionals and businesses through strategic
               consultancy, practical training and innovative digital solutions.
             </p>

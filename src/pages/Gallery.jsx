@@ -1,6 +1,13 @@
 import { motion } from "framer-motion";
 import { Header, Footer, SocialDock } from "../components/Layout";
 import Reveal from "../components/Reveal";
+import { BrandName } from "../components/BrandName";
+
+const gallerySections = [
+  ["01", "Images", "A visual record of our workshops, projects, events and the people behind the work.", "gallery-images"],
+  ["02", "Videos", "Stories, conversations and ideas brought to life through motion.", "gallery-videos"],
+  ["03", "Testimonials", "Words from the people and organisations who have shared the journey with us.", "gallery-testimonials"],
+];
 
 export default function Gallery() {
   return (
@@ -25,47 +32,27 @@ export default function Gallery() {
 
           <p>
             A collection of our projects, events, workshops and milestones.
-            This gallery will continue to grow as SAMFI grows.
+            This gallery will continue to grow as <BrandName /> grows.
           </p>
         </div>
 
         <div className="hero-mark" />
       </motion.section>
 
-      <section className="detail-intro">
-        <Reveal>
-          <p className="eyebrow">Coming Soon</p>
-
-          <h2>
-            Photos.
-            <br />
-            Videos.
-            <br />
-            Stories.
-          </h2>
-        </Reveal>
-
-        <Reveal>
-          <div>
-            <p>
-              This page will showcase our workshops, consultancy sessions,
-              community initiatives and digital projects through carefully
-              curated photos and videos.
-            </p>
-
-            <p>
-              New content will be added as our journey continues.
-            </p>
-          </div>
-        </Reveal>
-      </section>
-
-      <section className="page-visual-section">
-        <Reveal className="page-visual-placeholder gallery-visual-placeholder">
-          <span>GALLERY PREVIEW</span>
-          <strong>Your next story starts here.</strong>
-          <small>Suggested format: wide event, project or workshop photograph</small>
-        </Reveal>
+      <section className="gallery-collections" aria-label="Gallery collections">
+        {gallerySections.map(([number, label, description, className], index) => (
+          <Reveal className={`gallery-collection ${className}`} delay={index * 0.08} key={label}>
+            <div className="gallery-collection-copy">
+              <p className="eyebrow">{number} · Collection</p>
+              <h2>{label}</h2>
+              <p>{description}</p>
+            </div>
+            <div className="gallery-collection-preview" aria-label={`${label} preview`}>
+              <span>{label} collection</span>
+              <strong>{label === "Testimonials" ? "Shared experiences, in their own words." : "New stories coming soon."}</strong>
+            </div>
+          </Reveal>
+        ))}
       </section>
 
       <Footer />

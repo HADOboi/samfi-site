@@ -1,10 +1,11 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { AnimatePresence, motion } from 'framer-motion'
-import { ArrowDown, ArrowUpRight, X } from 'lucide-react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useEffect, useRef } from 'react'
+import { motion } from 'framer-motion'
+import { ArrowUpRight } from 'lucide-react'
 import { sectors } from '../data/sectors'
 import { Header, Footer, SocialDock } from '../components/Layout'
-import Reveal from '../components/Reveal'
+import { BrandName } from '../components/BrandName'
+import goldLogo from '../assets/samfi-gold-logo.png'
 
 const heroPlanets = [
   {
@@ -38,7 +39,7 @@ const heroPlanets = [
     size: "22%"
   },
   {
-    label: "SAMFI Solutions",
+    label: "Digital Solutions",
     number: "04",
     path: "/solutions",
     color: "#61e4c5",
@@ -50,12 +51,61 @@ const heroPlanets = [
 ];
 
 export default function Home() {
-  const [active, setActive] = useState(null);
-  const sector = sectors.find(s => s.slug === active);
-  const ModalIcon = sector?.icon;
+  const navigate = useNavigate();
+  const carouselRef = useRef(null);
+  const galleryItems = [
+    ['Image', 'People, purpose and progress'], ['Video', 'Ideas in motion'],
+    ['Image', 'Learning in action'], ['Video', 'Stories worth sharing'],
+  ];
+
+  useEffect(() => {
+    const carousel = carouselRef.current;
+    if (!carousel || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+    let dragging = false;
+    let startX = 0;
+    let startScroll = 0;
+    const loopWidth = () => carousel.scrollWidth / 3;
+    const keepInLoop = () => {
+      const width = loopWidth();
+      if (carousel.scrollLeft >= width * 2) carousel.scrollLeft -= width;
+      if (carousel.scrollLeft <= 0) carousel.scrollLeft += width;
+    };
+    const advance = () => {
+      if (dragging) return;
+      const slide = carousel.querySelector('.gallery-slide');
+      const step = slide ? slide.offsetWidth + 20 : 0;
+      const width = loopWidth();
+      if (carousel.scrollLeft + step >= width * 2) carousel.scrollLeft -= width;
+      carousel.scrollBy({ left: step, behavior: 'smooth' });
+    };
+    const onPointerDown = (event) => {
+      dragging = true; startX = event.clientX; startScroll = carousel.scrollLeft;
+      carousel.setPointerCapture(event.pointerId); carousel.classList.add('is-dragging');
+    };
+    const onPointerMove = (event) => {
+      if (!dragging) return;
+      carousel.scrollLeft = startScroll - (event.clientX - startX); keepInLoop();
+    };
+    const onPointerUp = (event) => {
+      dragging = false; carousel.releasePointerCapture?.(event.pointerId); carousel.classList.remove('is-dragging');
+    };
+    carousel.scrollLeft = loopWidth();
+    const timer = window.setInterval(advance, 5000);
+    carousel.addEventListener('pointerdown', onPointerDown);
+    carousel.addEventListener('pointermove', onPointerMove);
+    carousel.addEventListener('pointerup', onPointerUp);
+    carousel.addEventListener('pointercancel', onPointerUp);
+    return () => {
+      window.clearInterval(timer);
+      carousel.removeEventListener('pointerdown', onPointerDown);
+      carousel.removeEventListener('pointermove', onPointerMove);
+      carousel.removeEventListener('pointerup', onPointerUp);
+      carousel.removeEventListener('pointercancel', onPointerUp);
+    };
+  }, []);
 
   return (
-    <main>
+    <main className="home-page">
       <Header />
       <SocialDock />
       
@@ -66,11 +116,7 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }} 
           transition={{ duration: 0.6, ease: [.16, 1, .3, 1] }}
         >
-          <h1>Clean what blocks.<br /><em>Elevate what moves.</em></h1>
-          <a className="scroll-cue" href="#sectors">
-            <span>Explore our services</span>
-            <ArrowDown size={16} />
-          </a>
+          <h1>to empower your<br /><em>brain &amp; business...</em></h1>
         </motion.div>
         
         <div className="hero-orbit">
@@ -101,15 +147,14 @@ export default function Home() {
           <div className="orbit-outer-ring" />
           <div className="orbit-axis-h" />
           <div className="orbit-axis-v" />
+          <img className="orbit-logo" src={goldLogo} alt="Samfi" />
         </div>
       </section>
 
       <section id="sectors" className="sectors">
-        <div className="section-head">
-          <p className="eyebrow">What SAMFI does</p>
-          <p>Four ways to<br />clean and elevate.</p>
+        <div className="home-section-heading">
+          <h2>Services</h2>
         </div>
-        
         <div className="sector-grid">
           {sectors.map((s, i) => {
             const Icon = s.icon;
@@ -122,7 +167,7 @@ export default function Home() {
                 transition={{ delay: i * .12, duration: .7, ease: [.16, 1, .3, 1] }} 
                 key={s.slug} 
                 className={`sector-wrap ${s.color}`} 
-                onClick={() => setActive(s.slug)}
+                onClick={() => navigate(s.slug)}
               >
                 <span className="sector-card">
                   <span className="card-top">
@@ -144,87 +189,37 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="manifesto">
-        <Reveal>
-          <p className="eyebrow">The SAMFI approach</p>
-          <h2>Clear the noise.<br /><em>Raise the standard.</em></h2>
-        </Reveal>
-        <Reveal className="manifesto-copy">
-          <p>“Clean and elevate” is our way of working: remove what prevents progress, then strengthen what helps people and organisations flourish.</p>
-          <Link to="/empowerment">How we work <ArrowUpRight size={17} /></Link>
-        </Reveal>
+      <section className="home-about">
+        <div className="home-section-copy home-section-heading">
+          <h2>About us</h2>
+          <p className="section-tagline">Making room for better thinking.</p>
+        </div>
+        <div className="home-about-copy">
+          <p><BrandName /> helps people and organisations clear the noise, build capability and move forward with purpose. Our work brings together consultancy, learning and digital solutions to create practical, lasting change.</p>
+          <Link className="home-link" to="/about">Read more <ArrowUpRight size={17} /></Link>
+        </div>
       </section>
 
-      <section className="principles">
-        <Reveal>
-          <p className="eyebrow">Built around what lasts</p>
-        </Reveal>
-        <div>
-          {[['01', 'Clarity before action'], ['02', 'Progress with proof'], ['03', 'Capability, not dependency']].map(([n, t]) => (
-            <Reveal key={n} className="principle">
-              <span>{n}</span>
-              <h3>{t}</h3>
-            </Reveal>
+      <section className="home-gallery">
+        <div className="home-gallery-heading">
+          <div>
+            <h2>Gallery</h2>
+            <p className="section-tagline">Moments that move us forward.</p>
+          </div>
+          <Link className="home-link" to="/gallery">Show more <ArrowUpRight size={17} /></Link>
+        </div>
+        <div className="gallery-carousel" ref={carouselRef} aria-label="Gallery preview">
+          {[...galleryItems, ...galleryItems, ...galleryItems].map(([type, title], index) => (
+            <article className={`gallery-slide gallery-slide-${(index % galleryItems.length) + 1}`} key={`${title}-${index}`}>
+              <span>{type} · 0{index + 1}</span>
+              {type === 'Video' && <i className="gallery-play">▶</i>}
+              <strong>{title}</strong>
+            </article>
           ))}
         </div>
       </section>
 
       <Footer />
-
-      <AnimatePresence>
-        {sector && (
-          <motion.div 
-            className="sector-modal-backdrop" 
-            initial={{ opacity: 0 }} 
-            animate={{ opacity: 1 }} 
-            exit={{ opacity: 0 }} 
-            onClick={() => setActive(null)}
-          >
-            <motion.article 
-              className={`sector-modal ${sector.color}`} 
-              initial={{ y: 35, opacity: 0 }} 
-              animate={{ y: 0, opacity: 1 }} 
-              exit={{ y: 25, opacity: 0 }} 
-              onClick={e => e.stopPropagation()}
-            >
-              <button className="modal-close" onClick={() => setActive(null)} aria-label="Close">
-                <X size={18} />
-              </button>
-              
-              <div className="modal-header-badge">
-                <span className="modal-num">{sector.number}</span>
-                <span className="modal-icon-container">
-                  {ModalIcon && <ModalIcon size={20} />}
-                </span>
-              </div>
-
-              <p className="eyebrow">{sector.label}</p>
-              <h2>{sector.title}</h2>
-              <p className="modal-preview">{sector.preview}</p>
-
-              {sector.offerings && sector.offerings.length > 0 && (
-                <div className="modal-offerings">
-                  <h4>Core Offerings</h4>
-                  <ul>
-                    {sector.offerings.map((offering, idx) => (
-                      <li key={idx}>
-                        <span className="bullet">✦</span>
-                        <span>{offering}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              <div className="modal-footer">
-                <Link to={sector.slug} className="modal-link" onClick={() => setActive(null)}>
-                  More details <ArrowUpRight size={16} />
-                </Link>
-              </div>
-            </motion.article>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </main>
   )
 }

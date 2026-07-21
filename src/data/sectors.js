@@ -69,14 +69,14 @@ export const sectors = [
   {
     number: "04",
     slug: "/solutions",
-    label: "SAMFI Solutions",
+    label: "Digital Solutions",
     eyebrow: "Technology that moves work forward",
     title: "Digital products, built to perform.",
     short: "Web, app and software development for organisations ready to grow.",
     preview:
       "A focused technology team that designs and develops useful, reliable products for real business needs.",
     description:
-      "SAMFI Solutions is our dedicated technology practice: a focused team for useful, reliable digital products that meet real business needs.",
+      "Digital Solutions is our dedicated technology practice: a focused team for useful, reliable digital products that meet real business needs.",
     icon: Boxes,
     offerings: ["Web development", "App development", "Software development"],
     color: "blue",

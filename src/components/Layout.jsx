@@ -1,9 +1,18 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ArrowUp, ArrowUpRight, Menu, Share2, X } from "lucide-react";
-import { FaFacebookF, FaInstagram, FaLinkedinIn, FaWhatsapp, FaXTwitter, FaYoutube } from "react-icons/fa6";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedinIn,
+  FaWhatsapp,
+  FaXTwitter,
+  FaYoutube,
+} from "react-icons/fa6";
 import { useEffect, useRef, useState } from "react";
 import { useLenis } from "lenis/react";
 import logo from "../assets/samfi-gold-logo.png";
+import blacklogo from "../assets/samfi-black-logo.png";
+import { BrandName } from "./BrandName";
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -63,17 +72,30 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
   return (
-    <header className={`site-header ${compact ? "compact" : ""} ${open ? "menu-open" : ""}`}>
+    <header
+      className={`site-header ${compact ? "compact" : ""} ${open ? "menu-open" : ""}`}
+    >
       <div className="header-container">
-        <Link className="brand-logo" to="/" onClick={(event) => { event.preventDefault(); navigateHome(); }} aria-label="SAMFI home">
-          <img src={logo} alt="SAMFI — to empower your brain and business" />
+        <Link
+          className="brand-logo"
+          to="/"
+          onClick={(event) => {
+            event.preventDefault();
+            navigateHome();
+          }}
+          aria-label="SAMFI home"
+        >
+          <img src={blacklogo} alt="SAMFI — to empower your brain and business" />
         </Link>
-        
+
         <nav className={`header-nav ${open ? "open" : ""}`}>
           <button
             type="button"
             className={`nav-link ${pathname === "/" ? "active" : ""}`}
-            onClick={(e) => { setOpen(false); navigateHome(e); }}
+            onClick={(e) => {
+              setOpen(false);
+              navigateHome(e);
+            }}
           >
             Home
           </button>
@@ -86,7 +108,13 @@ export function Header() {
             About Us
           </Link>
 
-          <a href="/#sectors" onClick={(e) => { setOpen(false); navigateToSectors(e); }}>
+          <a
+            href="/#sectors"
+            onClick={(e) => {
+              setOpen(false);
+              navigateToSectors(e);
+            }}
+          >
             Services
           </a>
 
@@ -101,7 +129,10 @@ export function Header() {
           <a
             className="nav-contact mobile-only-contact"
             href="#contact"
-            onClick={(e) => { setOpen(false); navigateToContact(e); }}
+            onClick={(e) => {
+              setOpen(false);
+              navigateToContact(e);
+            }}
           >
             Contact <ArrowUpRight size={15} />
           </a>
@@ -111,11 +142,18 @@ export function Header() {
           <a
             className="nav-contact desktop-only-contact"
             href="#contact"
-            onClick={(e) => { setOpen(false); navigateToContact(e); }}
+            onClick={(e) => {
+              setOpen(false);
+              navigateToContact(e);
+            }}
           >
             Contact <ArrowUpRight size={15} />
           </a>
-          <button className="menu" onClick={() => setOpen(!open)} aria-label="Menu">
+          <button
+            className="menu"
+            onClick={() => setOpen(!open)}
+            aria-label="Menu"
+          >
             {open ? <X /> : <Menu />}
           </button>
         </div>
@@ -130,14 +168,13 @@ export function SocialDock() {
   const { pathname } = useLocation();
 
   const socialLinks = [
-    ["WhatsApp", FaWhatsapp],
-    ["Facebook", FaFacebookF],
-    ["Instagram", FaInstagram],
-    ["X", FaXTwitter],
-    ["YouTube", FaYoutube],
-    ["LinkedIn", FaLinkedinIn],
+    ["YouTube", FaYoutube, "https://youtube.com/@samfiglobal"],
+    ["Instagram", FaInstagram, "https://instagram.com/samfiglobal"],
+    ["Facebook", FaFacebookF, "https://facebook.com/samfiglobal"],
+    ["X", FaXTwitter, "https://x.com/SamfiGlobal"],
+    ["LinkedIn", FaLinkedinIn, "https://linkedin.com/in/samfiglobal"],
+    ["WhatsApp", FaWhatsapp, "https://wa.me/+918606863175"],
   ];
-
   // Close the mobile cluster on route change.
   useEffect(() => {
     setOpen(false);
@@ -161,18 +198,24 @@ export function SocialDock() {
       aria-label="Social media links"
     >
       <div className="dock-items">
-        {socialLinks.map(([name, Icon], i) => (
-          <button
-            type="button"
+        {socialLinks.map(([name, Icon, url], i) => (
+          <a
             key={name}
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
             aria-label={name}
             title={name}
             className="dock-item"
-            style={{ transitionDelay: open ? `${i * 35}ms` : `${(socialLinks.length - i) * 25}ms` }}
+            style={{
+              transitionDelay: open
+                ? `${i * 35}ms`
+                : `${(socialLinks.length - i) * 25}ms`,
+            }}
             tabIndex={open ? 0 : -1}
           >
             <Icon aria-hidden="true" />
-          </button>
+          </a>
         ))}
       </div>
 
@@ -242,15 +285,30 @@ export function Footer() {
             Tell us where you are today. We’ll start with a thoughtful
             conversation.
           </p>
-          <a className="contact-button" href="mailto:samfiglobal@gmail.com">
-            hello@samfi.org <ArrowUpRight size={17} />
-          </a>
+          <div className="contact-buttons">
+            <a
+              className="contact-button"
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=samfiglobal@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Email Us<ArrowUpRight size={17} />
+            </a>
+            <a
+              className="contact-button contact-whatsapp"
+              href="https://wa.me/+918606863175"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Chat with Samfi on WhatsApp"
+            >
+              <FaWhatsapp size={17} /><ArrowUpRight size={17} />
+            </a>
+          </div>
         </div>
       </div>
       <div className="footer-bottom">
         <img className="footer-logo" src={logo} alt="SAMFI" />
-        <span>© {new Date().getFullYear()} SAMFI. All rights reserved.</span>
-        <span>To empower your brain &amp; business.</span>
+        <span>© {new Date().getFullYear()} <BrandName />. All rights reserved.</span>
       </div>
     </footer>
   );
