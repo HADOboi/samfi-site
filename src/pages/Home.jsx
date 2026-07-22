@@ -11,7 +11,6 @@ const heroPlanets = [
   {
     label: "Management Consultancy",
     number: "01",
-    path: "/consultancy",
     color: "var(--clay)",
     glow: "rgba(176, 93, 68, 0.25)",
     left: "66.5%",
@@ -21,7 +20,6 @@ const heroPlanets = [
   {
     label: "Personal Empowerment",
     number: "02",
-    path: "/empowerment",
     color: "var(--sage)",
     glow: "rgba(124, 145, 105, 0.25)",
     left: "11.7%",
@@ -31,7 +29,6 @@ const heroPlanets = [
   {
     label: "Training & Development",
     number: "03",
-    path: "/training",
     color: "var(--ochre)",
     glow: "rgba(191, 150, 64, 0.25)",
     left: "88.3%",
@@ -41,7 +38,6 @@ const heroPlanets = [
   {
     label: "Digital Solutions",
     number: "04",
-    path: "/solutions",
     color: "#61e4c5",
     glow: "rgba(97, 228, 197, 0.35)",
     left: "33.5%",
@@ -120,34 +116,82 @@ export default function Home() {
         </motion.div>
         
         <div className="hero-orbit">
-          {heroPlanets.map((p) => (
-            <Link
-              key={p.number}
-              to={p.path}
-              className="hero-planet"
-              style={{
-                left: p.left,
-                top: p.top,
-                width: p.size,
-                height: p.size,
-                '--glow-color': p.glow,
-                '--planet-color': p.color
-              }}
-              aria-label={`${p.number} - ${p.label}`}
-            >
-              <span className="planet-dot" />
-              <span className="planet-tooltip">
-                <span className="tooltip-num">{p.number}</span>
-                <span className="tooltip-text">{p.label}</span>
-              </span>
-            </Link>
-          ))}
+          {heroPlanets.map((p) => {
+            const sector = sectors.find((s) => s.number === p.number);
+            return (
+              <Link
+                key={p.number}
+                to={sector.slug}
+                className="hero-planet"
+                style={{
+                  left: p.left,
+                  top: p.top,
+                  width: p.size,
+                  height: p.size,
+                  '--glow-color': p.glow,
+                  '--planet-color': p.color
+                }}
+                aria-label={`${p.number} - ${p.label}`}
+              >
+                <span className="planet-dot" />
+                <span className="planet-tooltip">
+                  <span className="tooltip-num">{p.number}</span>
+                  <span className="tooltip-text">{p.label}</span>
+                </span>
+              </Link>
+            );
+          })}
           <div className="orbit-inner-ring" />
           <div className="orbit-mid-ring" />
           <div className="orbit-outer-ring" />
           <div className="orbit-axis-h" />
           <div className="orbit-axis-v" />
           <img className="orbit-logo" src={goldLogo} alt="Samfi" />
+        </div>
+      </section>
+
+      <section className="home-about">
+        <div className="home-section-copy home-section-heading">
+          <h2>About us</h2>
+          <p className="section-tagline">
+            <BrandName /> helps people and organisations clear the noise, build
+            capability and move forward with purpose — bringing consultancy,
+            learning and digital solutions together into practical, lasting
+            change.
+          </p>
+          <Link className="home-link" to="/about">Read more <ArrowUpRight size={17} /></Link>
+        </div>
+        <div className="vm-grid">
+          <motion.div
+            className="vm-card"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <p className="eyebrow">Our Vision</p>
+            <h3>Vision statement</h3>
+            <p>
+              Placeholder — the vision statement will be provided by the client.
+              This space describes the future <BrandName /> is working towards
+              and the change it hopes to create.
+            </p>
+          </motion.div>
+          <motion.div
+            className="vm-card"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ delay: 0.12, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <p className="eyebrow">Our Mission</p>
+            <h3>Mission statement</h3>
+            <p>
+              Placeholder — the mission statement will be provided by the
+              client. This space describes how <BrandName /> delivers on that
+              vision through its everyday work.
+            </p>
+          </motion.div>
         </div>
       </section>
 
@@ -186,17 +230,6 @@ export default function Home() {
               </motion.button>
             )
           })}
-        </div>
-      </section>
-
-      <section className="home-about">
-        <div className="home-section-copy home-section-heading">
-          <h2>About us</h2>
-          <p className="section-tagline">Making room for better thinking.</p>
-        </div>
-        <div className="home-about-copy">
-          <p><BrandName /> helps people and organisations clear the noise, build capability and move forward with purpose. Our work brings together consultancy, learning and digital solutions to create practical, lasting change.</p>
-          <Link className="home-link" to="/about">Read more <ArrowUpRight size={17} /></Link>
         </div>
       </section>
 

@@ -3,7 +3,7 @@ import { BriefcaseBusiness, Compass, GraduationCap, Boxes } from "lucide-react";
 export const sectors = [
   {
     number: "01",
-    slug: "/consultancy",
+    slug: "/services/management-consultancy",
     label: "Management Consultancy",
     eyebrow: "Strategy with substance",
     title: "Clearer direction. Better decisions.",
@@ -25,7 +25,7 @@ export const sectors = [
   },
   {
     number: "02",
-    slug: "/empowerment",
+    slug: "/services/personal-empowerment",
     label: "Personal Empowerment",
     eyebrow: "Clean the noise. Elevate the person.",
     title: "Clear the blocks. Elevate your potential.",
@@ -46,7 +46,7 @@ export const sectors = [
   },
   {
     number: "03",
-    slug: "/training",
+    slug: "/services/training-development",
     label: "Training & Development",
     eyebrow: "Learning that makes a difference",
     title: "Capability that lifts the whole organisation.",
@@ -68,7 +68,7 @@ export const sectors = [
   },
   {
     number: "04",
-    slug: "/solutions",
+    slug: "/services/digital-solutions",
     label: "Digital Solutions",
     eyebrow: "Technology that moves work forward",
     title: "Digital products, built to perform.",
@@ -80,5 +80,6 @@ export const sectors = [
     icon: Boxes,
     offerings: ["Web development", "App development", "Software development"],
     color: "blue",
+    template: "solutions",
   },
 ];
