@@ -10,7 +10,6 @@ import {
 } from "react-icons/fa6";
 import { useEffect, useRef, useState } from "react";
 import { useLenis } from "lenis/react";
-import logo from "../assets/samfi-gold-logo.png";
 import blacklogo from "../assets/samfi-black-logo.png";
 import { BrandName } from "./BrandName";
 import { sectors } from "../data/sectors";
@@ -18,7 +17,6 @@ import { sectors } from "../data/sectors";
 export function Header() {
   const [open, setOpen] = useState(false);
   const [compact, setCompact] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
   const { pathname } = useLocation();
   const lenis = useLenis();
 
@@ -50,20 +48,6 @@ export function Header() {
       target.scrollIntoView({ behavior: "smooth" });
     }
   };
-
-  // Close the Services menu on route change.
-  useEffect(() => {
-    setServicesOpen(false);
-  }, [pathname]);
-
-  // Close the Services menu on Escape.
-  useEffect(() => {
-    const onKey = (event) => {
-      if (event.key === "Escape") setServicesOpen(false);
-    };
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
-  }, []);
 
   useEffect(() => {
     const onScroll = () => setCompact(window.scrollY > 80);
@@ -108,29 +92,23 @@ export function Header() {
             About Us
           </Link>
 
-          <div
-            className={`nav-services has-dropdown ${servicesOpen ? "open" : ""}`}
-          >
-            <button
-              type="button"
+          <div className="nav-services has-dropdown">
+            <Link
+              to="/#services"
               className="nav-services-trigger"
-              aria-haspopup="true"
-              aria-expanded={servicesOpen}
-              onClick={() => setServicesOpen((v) => !v)}
+              onClick={() => setOpen(false)}
             >
               Services
-            </button>
+            </Link>
             <ul className="nav-dropdown">
               {sectors.map((s) => (
                 <li key={s.slug}>
                   <Link
                     to={s.slug}
                     onClick={() => {
-                      setServicesOpen(false);
                       setOpen(false);
                     }}
                   >
-                    <span className="dropdown-num">{s.number}</span>
                     {s.label}
                   </Link>
                 </li>
@@ -327,7 +305,6 @@ export function Footer() {
         </div>
       </div>
       <div className="footer-bottom">
-        <img className="footer-logo" src={logo} alt="SAMFI" />
         <span>© {new Date().getFullYear()} <BrandName />. All rights reserved.</span>
       </div>
     </footer>

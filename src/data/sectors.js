@@ -2,9 +2,9 @@ import { BriefcaseBusiness, Compass, GraduationCap, Boxes } from "lucide-react";
 
 export const sectors = [
   {
-    number: "01",
-    slug: "/services/management-consultancy",
-    label: "Management Consultancy",
+    number: "02",
+    slug: "/services/business-solutions",
+    label: "Business Solutions",
     eyebrow: "Strategy with substance",
     title: "Clearer direction. Better decisions.",
     short:
@@ -24,9 +24,9 @@ export const sectors = [
     color: "clay",
   },
   {
-    number: "02",
-    slug: "/services/personal-empowerment",
-    label: "Personal Empowerment",
+    number: "01",
+    slug: "/services/personal-solutions",
+    label: "Personal Solutions",
     eyebrow: "Clean the noise. Elevate the person.",
     title: "Clear the blocks. Elevate your potential.",
     short: "Psychology-informed support for more grounded, capable growth.",
@@ -46,8 +46,8 @@ export const sectors = [
   },
   {
     number: "03",
-    slug: "/services/training-development",
-    label: "Training & Development",
+    slug: "/services/training-solutions",
+    label: "Training Solutions",
     eyebrow: "Learning that makes a difference",
     title: "Capability that lifts the whole organisation.",
     short:
@@ -82,4 +82,4 @@ export const sectors = [
     color: "blue",
     template: "solutions",
   },
-];
+].sort((a, b) => Number(a.number) - Number(b.number));

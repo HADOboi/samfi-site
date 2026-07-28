@@ -7,44 +7,41 @@ import { Header, Footer, SocialDock } from '../components/Layout'
 import { BrandName } from '../components/BrandName'
 import goldLogo from '../assets/samfi-gold-logo.png'
 
-const heroPlanets = [
-  {
-    label: "Management Consultancy",
-    number: "01",
-    color: "var(--clay)",
-    glow: "rgba(176, 93, 68, 0.25)",
-    left: "66.5%",
-    top: "78.6%",
-    size: "10%"
-  },
-  {
-    label: "Personal Empowerment",
-    number: "02",
+const planetAppearance = {
+  "/services/personal-solutions": {
     color: "var(--sage)",
     glow: "rgba(124, 145, 105, 0.25)",
     left: "11.7%",
     top: "82.1%",
-    size: "14%"
+    size: "22%"
   },
-  {
-    label: "Training & Development",
-    number: "03",
+  "/services/business-solutions": {
+    color: "var(--clay)",
+    glow: "rgba(176, 93, 68, 0.25)",
+    left: "66.5%",
+    top: "78.6%",
+    size: "17%"
+  },
+  "/services/training-solutions": {
     color: "var(--ochre)",
     glow: "rgba(191, 150, 64, 0.25)",
     left: "88.3%",
     top: "17.9%",
-    size: "22%"
+    size: "14%"
   },
-  {
-    label: "Digital Solutions",
-    number: "04",
+  "/services/digital-solutions": {
     color: "#61e4c5",
     glow: "rgba(97, 228, 197, 0.35)",
     left: "33.5%",
     top: "21.4%",
-    size: "12%"
+    size: "10%"
   }
-];
+};
+
+const heroPlanets = sectors.map((sector) => ({
+  ...sector,
+  ...planetAppearance[sector.slug],
+}));
 
 export default function Home() {
   const navigate = useNavigate();
@@ -117,11 +114,10 @@ export default function Home() {
         
         <div className="hero-orbit">
           {heroPlanets.map((p) => {
-            const sector = sectors.find((s) => s.number === p.number);
             return (
               <Link
-                key={p.number}
-                to={sector.slug}
+                key={p.slug}
+                to={p.slug}
                 className="hero-planet"
                 style={{
                   left: p.left,
@@ -131,11 +127,10 @@ export default function Home() {
                   '--glow-color': p.glow,
                   '--planet-color': p.color
                 }}
-                aria-label={`${p.number} - ${p.label}`}
+                aria-label={p.label}
               >
                 <span className="planet-dot" />
                 <span className="planet-tooltip">
-                  <span className="tooltip-num">{p.number}</span>
                   <span className="tooltip-text">{p.label}</span>
                 </span>
               </Link>
@@ -195,7 +190,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="sectors" className="sectors">
+      <section id="services" className="sectors">
         <div className="home-section-heading">
           <h2>Services</h2>
         </div>
