@@ -1,5 +1,13 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { ArrowUp, ArrowUpRight, Menu, Share2, X } from "lucide-react";
+import {
+  ArrowUp,
+  ArrowUpRight,
+  Menu,
+  Share2,
+  X,
+  Phone,
+  Mail,
+} from "lucide-react";
 import {
   FaFacebookF,
   FaInstagram,
@@ -11,6 +19,7 @@ import {
 import { useEffect, useRef, useState } from "react";
 import { useLenis } from "lenis/react";
 import blacklogo from "../assets/samfi-black-logo.png";
+import goldLogo from "../assets/samfi-gold-logo.png";
 import { BrandName } from "./BrandName";
 import { sectors } from "../data/sectors";
 
@@ -69,7 +78,10 @@ export function Header() {
           }}
           aria-label="SAMFI home"
         >
-          <img src={blacklogo} alt="SAMFI — to empower your brain and business" />
+          <img
+            src={blacklogo}
+            alt="SAMFI — to empower your brain and business"
+          />
         </Link>
 
         <nav className={`header-nav ${open ? "open" : ""}`}>
@@ -84,13 +96,32 @@ export function Header() {
             Home
           </button>
 
-          <Link
-            to="/about"
-            className={pathname === "/about" ? "active" : ""}
-            onClick={() => setOpen(false)}
-          >
-            About Us
-          </Link>
+          <div className="nav-services has-dropdown">
+            <Link
+              to="/about"
+              className={`nav-services-trigger ${pathname.startsWith("/about") ? "active" : ""}`}
+              onClick={() => setOpen(false)}
+            >
+              About Us
+            </Link>
+            <ul className="nav-dropdown">
+              <li>
+                <Link to="/about#vision" onClick={() => setOpen(false)}>
+                  Vision
+                </Link>
+              </li>
+              <li>
+                <Link to="/about#mission" onClick={() => setOpen(false)}>
+                  Mission
+                </Link>
+              </li>
+              <li>
+                <Link to="/about#affiliation" onClick={() => setOpen(false)}>
+                  Affiliation
+                </Link>
+              </li>
+            </ul>
+          </div>
 
           <div className="nav-services has-dropdown">
             <Link
@@ -269,13 +300,12 @@ export function Footer() {
       <div className="contact-card">
         <div>
           <p className="eyebrow">Let’s make room for what is next</p>
-          <h2>
-            Ready to{" "}
-            <em>
-              clean
-              <br />
-              and elevate?
-            </em>
+          <h2 className="contact-headline">
+            Transforming People.
+            <br />
+            Strengthening Organizations.
+            <br />
+            <em>Shaping the Future.</em>
           </h2>
         </div>
         <div className="contact-action">
@@ -290,7 +320,8 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Email Us<ArrowUpRight size={17} />
+              Email Us
+              <ArrowUpRight size={17} />
             </a>
             <a
               className="contact-button contact-whatsapp"
@@ -299,13 +330,155 @@ export function Footer() {
               rel="noopener noreferrer"
               aria-label="Chat with Samfi on WhatsApp"
             >
-              <FaWhatsapp size={17} /><ArrowUpRight size={17} />
+              <FaWhatsapp size={17} />
+              <ArrowUpRight size={17} />
             </a>
           </div>
         </div>
       </div>
+
+      <div className="footer-info-section">
+        <div className="footer-info-container">
+          <div className="footer-brand-block">
+            <img
+              src={goldLogo}
+              alt="Samfi Global Academy"
+              className="footer-gold-logo"
+            />
+            <div className="footer-academy-details">
+              <h3 className="academy-title">Samfi Global Academy</h3>
+              <p className="reg-label">Kerala Govt. Reg. No.</p>
+              <p className="reg-value">U-KL-09-0033203</p>
+
+              <p className="reg-label">IGNET Reg. No.</p>
+              <p className="reg-value">
+                IGNCWP334
+                <br />
+                (ISO 9001-2015)
+              </p>
+            </div>
+          </div>
+
+          <div className="footer-quicklinks-block">
+            <h4 className="footer-block-title">Quick Links</h4>
+            <div className="quicklinks-grid">
+              <ul className="quicklinks-list">
+                <li>
+                  <Link to="/">Home</Link>
+                </li>
+                <li>
+                  <Link to="/about">About Us</Link>
+                </li>
+                <li>
+                  <Link to="/about#vision">Vision</Link>
+                </li>
+                <li>
+                  <Link to="/about#mission">Mission</Link>
+                </li>
+                <li>
+                  <Link to="/about#affiliation">Affiliation</Link>
+                </li>
+                <li>
+                  <Link to="/gallery">Gallery</Link>
+                </li>
+              </ul>
+              <ul className="quicklinks-list">
+                <li>
+                  <Link to="/#services">Services</Link>
+                </li>
+                <li>
+                  <Link to="/services/personal-solutions">
+                    Personal Solutions
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/services/business-solutions">
+                    Business Solutions
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/services/training-solutions">
+                    Training Solutions
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/services/digital-solutions">
+                    Digital Solutions
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/#contact">Contact</Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="footer-contact-details">
+            <h4 className="footer-block-title">Contact & Appointments</h4>
+            <div className="footer-card-box">
+              <div className="footer-card-item">
+                <Phone size={18} className="footer-card-icon" />
+                <div>
+                  <span className="footer-card-label">Book an Appointment</span>
+                  <p className="footer-card-text">
+                    <span style={{ display: "block" }}>
+                      <strong>India:</strong>{" "}
+                      <a href="tel:+918606863175" className="info-link">
+                        +91 860 6863 175
+                      </a>
+                    </span>
+                    <span style={{ display: "block", marginTop: "2px" }}>
+                      <strong>UAE:</strong>{" "}
+                      <a href="tel:+971506863175" className="info-link">
+                        +971 50 6863 175
+                      </a>
+                    </span>
+                  </p>
+                </div>
+              </div>
+
+              <div className="footer-card-item">
+                <Mail size={18} className="footer-card-icon" />
+                <div>
+                  <span className="footer-card-label">Direct Inquiries</span>
+                  <p className="footer-card-text">
+                    <span style={{ display: "block" }}>
+                      <a href="mailto:contact@samfi.org" className="info-link">
+                        contact@samfi.org
+                      </a>
+                    </span>
+                    <span style={{ display: "block", marginTop: "2px" }}>
+                      <a
+                        href="mailto:samfiglobal@gmail.com"
+                        className="info-link"
+                      >
+                        samfiglobal@gmail.com
+                      </a>
+                    </span>
+                  </p>
+                </div>
+              </div>
+
+              <div className="footer-card-item">
+                <Phone size={18} className="footer-card-icon" />
+                <div>
+                  <span className="footer-card-label">General Contact</span>
+                  <p className="footer-card-text">
+                    <a href="tel:+918129443316" className="info-link">
+                      +91 8129 44 33 16
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="footer-bottom">
-        <span>© {new Date().getFullYear()} <BrandName />. All rights reserved.</span>
+        <p className="footer-copyright">
+          © {new Date().getFullYear()} <BrandName />. All rights reserved.
+        </p>
       </div>
     </footer>
   );

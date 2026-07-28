@@ -13,28 +13,28 @@ const planetAppearance = {
     glow: "rgba(124, 145, 105, 0.25)",
     left: "11.7%",
     top: "82.1%",
-    size: "22%"
+    size: "12.5%"
   },
   "/services/business-solutions": {
     color: "var(--clay)",
     glow: "rgba(176, 93, 68, 0.25)",
     left: "66.5%",
     top: "78.6%",
-    size: "17%"
+    size: "14%"
   },
   "/services/training-solutions": {
     color: "var(--ochre)",
     glow: "rgba(191, 150, 64, 0.25)",
     left: "88.3%",
     top: "17.9%",
-    size: "14%"
+    size: "12%"
   },
   "/services/digital-solutions": {
     color: "#61e4c5",
     glow: "rgba(97, 228, 197, 0.35)",
     left: "33.5%",
     top: "21.4%",
-    size: "10%"
+    size: "9%"
   }
 };
 
@@ -113,6 +113,12 @@ export default function Home() {
         </motion.div>
         
         <div className="hero-orbit">
+          <div className="orbit-inner-ring" />
+          <div className="orbit-mid-ring" />
+          <div className="orbit-outer-ring" />
+          <div className="orbit-axis-h" />
+          <div className="orbit-axis-v" />
+          <img className="orbit-logo" src={goldLogo} alt="Samfi" />
           {heroPlanets.map((p) => {
             return (
               <Link
@@ -136,57 +142,46 @@ export default function Home() {
               </Link>
             );
           })}
-          <div className="orbit-inner-ring" />
-          <div className="orbit-mid-ring" />
-          <div className="orbit-outer-ring" />
-          <div className="orbit-axis-h" />
-          <div className="orbit-axis-v" />
-          <img className="orbit-logo" src={goldLogo} alt="Samfi" />
         </div>
       </section>
 
       <section className="home-about">
-        <div className="home-section-copy home-section-heading">
-          <h2>About us</h2>
-          <p className="section-tagline">
-            <BrandName /> helps people and organisations clear the noise, build
-            capability and move forward with purpose — bringing consultancy,
-            learning and digital solutions together into practical, lasting
-            change.
-          </p>
-          <Link className="home-link" to="/about">Read more <ArrowUpRight size={17} /></Link>
-        </div>
-        <div className="vm-grid">
-          <motion.div
-            className="vm-card"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <p className="eyebrow">Our Vision</p>
-            <h3>Vision statement</h3>
-            <p>
-              Placeholder — the vision statement will be provided by the client.
-              This space describes the future <BrandName /> is working towards
-              and the change it hopes to create.
-            </p>
-          </motion.div>
-          <motion.div
-            className="vm-card"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ delay: 0.12, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <p className="eyebrow">Our Mission</p>
-            <h3>Mission statement</h3>
-            <p>
-              Placeholder — the mission statement will be provided by the
-              client. This space describes how <BrandName /> delivers on that
-              vision through its everyday work.
-            </p>
-          </motion.div>
+        <div className="home-about-content">
+          <div className="home-section-heading">
+            <div className="home-about-header">
+              <h2>About us</h2>
+              <Link className="home-link home-about-readmore" to="/about">
+                Read more <ArrowUpRight size={17} />
+              </Link>
+            </div>
+            <div className="home-about-text">
+              <p>
+                <BrandName /> Global Academy is a multidisciplinary consulting and development
+                organization committed to transforming individuals, organisations, and
+                communities through the integration of Applied Psychology, Professional
+                Mentoring, Leadership Development &amp; Trainings, Operational Excellence, and
+                Future-Focused Digital Solutions.
+              </p>
+              <p>
+                We - at <BrandName /> - believe that meaningful transformation begins with
+                people and extends to organizations, communities, and the world of
+                technology by delivering practical, integrated, and impactful solutions that
+                empower growth, enhance performance, and create long lasting positive change.
+              </p>
+            </div>
+          </div>
+          
+          <div className="home-about-nav-buttons">
+            <Link className="outline-button home-nav-btn" to="/about#vision">
+              Vision <ArrowUpRight size={15} />
+            </Link>
+            <Link className="outline-button home-nav-btn" to="/about#mission">
+              Mission <ArrowUpRight size={15} />
+            </Link>
+            <Link className="outline-button home-nav-btn" to="/about#affiliation">
+              Affiliation <ArrowUpRight size={15} />
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -244,6 +239,24 @@ export default function Home() {
               <strong>{title}</strong>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section className="home-about home-why">
+        <div className="home-about-content">
+          <div className="home-section-heading">
+            <div className="home-about-header">
+              <h2>Why <BrandName />?</h2>
+            </div>
+            <div className="home-about-text">
+              <p>
+                What makes <BrandName /> unique is our integrated approach. We bridge human development, organizational excellence, professional learning, and digital innovation to deliver practical, evidence-based solutions that create lasting impact.
+              </p>
+              <p>
+                Whether you are an individual, seeking personal growth, or an organization pursuing operational excellence, or an institution preparing for the future, we partner with you to achieve meaningful and sustainable success.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 

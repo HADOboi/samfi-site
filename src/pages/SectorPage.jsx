@@ -3,6 +3,10 @@ import { ArrowUpRight, Check } from 'lucide-react'
 import { Header, Footer, SocialDock } from '../components/Layout'
 import { renderBrandName } from '../components/BrandName'
 import Reveal from '../components/Reveal'
+import PersonalSolutions from './PersonalSolutions'
+import BusinessSolutions from './BusinessSolutions'
+import TrainingSolutions from './TrainingSolutions'
+import DigitalSolutions from './DigitalSolutions'
 
 const solutionDetails = [
   'Purposeful, fast websites that turn your story, service or platform into an experience people want to use.',
@@ -22,7 +26,7 @@ function SolutionsPage({ sector: s }) {
         transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
       >
         <div className="solutions-copy">
-          <p className="eyebrow">Digital Solutions · Technology practice</p>
+          <p className="eyebrow">Digital Solutions</p>
           <h1>Technology that<br /><em>gets to work.</em></h1>
           <p>We design and build clear, capable digital products for businesses with real work to do.</p>
           <a className="solution-button" href="#services">
@@ -76,8 +80,13 @@ function SolutionsPage({ sector: s }) {
 }
 
 export default function SectorPage({ sector: s }) {
-  const Icon = s.icon
+  if (s.slug === '/services/personal-solutions') return <PersonalSolutions />
+  if (s.slug === '/services/business-solutions') return <BusinessSolutions />
+  if (s.slug === '/services/training-solutions') return <TrainingSolutions />
+  if (s.slug === '/services/digital-solutions') return <DigitalSolutions />
   if (s.template === 'solutions') return <SolutionsPage sector={s} />
+
+  const Icon = s.icon
 
   return (
     <main className={`sector-page ${s.color}`}>
@@ -102,9 +111,9 @@ export default function SectorPage({ sector: s }) {
 
       <section className="sector-story">
         <Reveal className="sector-image-placeholder">
-          <span>IMAGE AREA</span>
+          <span>PORTRAIT / LANDSCAPE PLACEHOLDER</span>
           <strong>{s.imageLabel}</strong>
-          <small>Suggested format: 4:5 editorial photograph</small>
+          <small>Suggested resolution: 16:9 · 1920x1080 px or 4:5 · 1200x1500 px</small>
         </Reveal>
         <Reveal className="story-copy" delay={0.15}>
           <p className="eyebrow">Clean and elevate</p>
@@ -135,8 +144,8 @@ export default function SectorPage({ sector: s }) {
           <p className="eyebrow">A place for your story</p>
           <h2>What could change<br /><em>with the right support?</em></h2>
           <div className="case-image-placeholder">
-            <span>IMAGE / CASE STUDY PLACEHOLDER</span>
-            <small>Wide 16:9 project or programme image</small>
+            <span>LANDSCAPE PLACEHOLDER</span>
+            <small>Wide 16:9 project or programme image (1920x1080 px)</small>
           </div>
           <a className="dark-button" href="#contact">
             Talk to our team <ArrowUpRight size={17} />
