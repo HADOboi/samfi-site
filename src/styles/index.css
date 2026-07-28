@@ -65,7 +65,7 @@ a {
 }
 
 .brand-name {
-  font-family: var(--fraktur);
+  font-family: "Old English Text MT", var(--sans);
   font-weight: 700;
   letter-spacing: 0;
   white-space: nowrap;
