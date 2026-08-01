@@ -49,12 +49,15 @@ export function Header() {
   const navigateToContact = (event) => {
     event.preventDefault();
     setOpen(false);
-    const target = document.getElementById("contact");
+    const target = document.querySelector("#contact .contact-card");
     if (!target) return;
     if (lenis) {
-      lenis.scrollTo(target, { duration: 1.2 });
+      lenis.scrollTo(target, {
+        duration: 1.2,
+        offset: (target.offsetHeight - window.innerHeight) / 2,
+      });
     } else {
-      target.scrollIntoView({ behavior: "smooth" });
+      target.scrollIntoView({ behavior: "smooth", block: "center" });
     }
   };
 
@@ -462,7 +465,7 @@ export function Footer() {
               <div className="footer-card-item">
                 <Phone size={18} className="footer-card-icon" />
                 <div>
-                  <span className="footer-card-label">General Contact</span>
+                  <span className="footer-card-label">Emergency Contact</span>
                   <p className="footer-card-text">
                     <a href="tel:+918129443316" className="info-link">
                       +91 8129 44 33 16

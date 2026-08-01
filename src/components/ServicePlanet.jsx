@@ -13,11 +13,6 @@ export function ServicePlanet({ color, glow, name }) {
         <div className="service-planet-orbit-ring" />
         <div className="planet-dot" />
       </div>
-      {name && (
-        <div className="service-planet-badge">
-          <span>{name}</span>
-        </div>
-      )}
     </div>
   );
 }

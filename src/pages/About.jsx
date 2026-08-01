@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useLenis } from "lenis/react";
 import {
   ArrowUpRight,
   BookOpen,
@@ -12,11 +13,13 @@ import {
   UsersRound,
 } from "lucide-react";
 import { Header, Footer, SocialDock } from "../components/Layout";
+import ImageCard from "../components/ImageCard";
 import Reveal from "../components/Reveal";
 import { BrandName } from "../components/BrandName";
 import logo from "../assets/samfi-gold-head-logo.png";
 import ignetseal from "../assets/ignet-seal.png";
 import isoseal from "../assets/iso-seal.png";
+import ignetCertification from "../assets/ignet-certification.png";
 
 const values = [
   [
@@ -63,6 +66,21 @@ const values = [
 
 export default function About() {
   const { hash } = useLocation();
+  const lenis = useLenis();
+
+  const scrollToContact = (event) => {
+    event.preventDefault();
+    const target = document.querySelector("#contact .contact-card");
+    if (!target) return;
+    if (lenis) {
+      lenis.scrollTo(target, {
+        duration: 1.2,
+        offset: (target.offsetHeight - window.innerHeight) / 2,
+      });
+    } else {
+      target.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  };
 
   useEffect(() => {
     if (hash) {
@@ -122,7 +140,7 @@ export default function About() {
             </h2>
             <p>
               To become the globally trusted center for human development,
-              organisational transformation, leadership mentoring and training,
+              organisational transformation, leadership mentoring, training
               and digital innovation.
             </p>
           </Reveal>
@@ -221,17 +239,11 @@ export default function About() {
             </div>
           </Reveal>
         </div>
-        <Reveal className="affiliation-visual page-visual-placeholder landscape-placeholder">
-          <span>LANDSCAPE PLACEHOLDER</span>
-          <strong>
-            Education with
-            <br />
-            real-world relevance.
-          </strong>
-          <small>
-            Suggested resolution: 16:9 · 1920x1080 px (Modern classroom
-            collaboration)
-          </small>
+        <Reveal className="certification-visual">
+          <ImageCard
+            src={ignetCertification}
+            alt="IGNET certification"
+          />
         </Reveal>
       </section>
 
@@ -264,7 +276,11 @@ export default function About() {
               Together, we combine evidence, experience, and ethical practice to
               create solutions that are grounded, useful, and made to last.
             </p>
-            <a className="outline-button" href="mailto:samfiglobal@gmail.com">
+            <a
+              className="outline-button"
+              href="#contact"
+              onClick={scrollToContact}
+            >
               Work with us <ArrowUpRight size={17} />
             </a>
           </Reveal>

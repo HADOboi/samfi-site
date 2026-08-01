@@ -3409,6 +3409,24 @@ footer {
     linear-gradient(135deg, #617d72 0%, #1d403a 70%, #112d2a 100%);
 }
 
+.image-card {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+}
+
+.image-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.4s ease;
+}
+
+.image-card:hover img {
+  transform: scale(1.04);
+}
+
 .affiliation-visual span,
 .team-visual span,
 .affiliation-visual small,
