@@ -241,7 +241,7 @@ export default function About() {
         </div>
         <Reveal className="certification-visual">
           <ImageCard
-            src={ignetCertification}
+            src="https://res.cloudinary.com/iiww9i7d/image/upload/f_auto,q_auto,w_714/v1788087504/ignet-certification.png"
             alt="IGNET certification"
           />
         </Reveal>
