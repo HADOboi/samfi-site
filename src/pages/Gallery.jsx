@@ -58,6 +58,7 @@ export default function Gallery() {
     setSelectedIndex((prev) => (prev === null ? 0 : (prev + 1) % galleryImages.length));
   }, []);
 
+  // Touch swipe support for mobile
   const handlePrevImage = useCallback(() => {
     setSelectedIndex((prev) =>
       prev === null ? 0 : (prev - 1 + galleryImages.length) % galleryImages.length
@@ -154,8 +155,8 @@ export default function Gallery() {
       <SocialDock />
 
       {/* Simple Heading Section */}
-      <header className="gallery-simple-header" style={{ padding: "140px 1rem 40px", textAlign: "center" }}>
-        <h1 style={{ fontSize: "3rem", fontWeight: "800", letterSpacing: "-0.02em" }}>Gallery</h1>
+      <header className="gallery-simple-header pt-32 pb-10 text-center">
+        <h1 className="text-4xl md:text-5xl font-bold tracking-tight">Gallery</h1>
       </header>
 
       {/* Images Section */}
