@@ -6,7 +6,6 @@ import { Header, Footer, SocialDock } from "../components/Layout";
 import Reveal from "../components/Reveal";
 import ImageCard from "../components/ImageCard";
 import VideoCard from "../components/VideoCard";
-import { BrandName } from "../components/BrandName";
 import { galleryImages } from "../data/gallery";
 import { galleryVideos } from "../data/videos";
 
@@ -58,7 +57,6 @@ export default function Gallery() {
     setSelectedIndex((prev) => (prev === null ? 0 : (prev + 1) % galleryImages.length));
   }, []);
 
-  // Touch swipe support for mobile
   const handlePrevImage = useCallback(() => {
     setSelectedIndex((prev) =>
       prev === null ? 0 : (prev - 1 + galleryImages.length) % galleryImages.length
@@ -154,14 +152,14 @@ export default function Gallery() {
       <Header />
       <SocialDock />
 
-      {/* Simple Heading Section */}
-      <header className="gallery-simple-header pt-32 pb-4">
+      {/* Gallery Header Heading */}
+      <section className="gallery-header-section" aria-label="Gallery">
         <div className="gallery-section-heading">
           <Reveal>
             <h1>Gallery</h1>
           </Reveal>
         </div>
-      </header>
+      </section>
 
       {/* Images Section */}
       <section className="gallery-images-section" aria-label="Image gallery">
@@ -422,3 +420,5 @@ export default function Gallery() {
     </main>
   );
 }
+
+
