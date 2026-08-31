@@ -153,30 +153,10 @@ export default function Gallery() {
       <Header />
       <SocialDock />
 
-      <motion.section
-        className="page-hero"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.45 }}
-      >
-        <div>
-          <p className="eyebrow">GALLERY</p>
-
-          <h1>
-            Our work.
-            <br />
-            <em>Our journey.</em>
-          </h1>
-
-          <p>
-            A visual record of our projects, executive workshops, milestone
-            assemblies, and on-site consultations. This collection continues to
-            grow as <BrandName /> expands across sectors.
-          </p>
-        </div>
-
-        <div className="hero-mark" />
-      </motion.section>
+      {/* Simple Heading Section */}
+      <header className="gallery-simple-header" style={{ padding: "140px 1rem 40px", textAlign: "center" }}>
+        <h1 style={{ fontSize: "3rem", fontWeight: "800", letterSpacing: "-0.02em" }}>Gallery</h1>
+      </header>
 
       {/* Images Section */}
       <section className="gallery-images-section" aria-label="Image gallery">
@@ -437,5 +417,3 @@ export default function Gallery() {
     </main>
   );
 }
-
-
