@@ -13,8 +13,10 @@ import {
 } from "lucide-react";
 import { Header, Footer, SocialDock } from "../components/Layout";
 import Reveal from "../components/Reveal";
+import ImageCard from "../components/ImageCard";
 import { BrandName } from "../components/BrandName";
 import { ServicePlanet } from "../components/ServicePlanet";
+import { galleryImages } from "../data/gallery";
 
 const services = [
   {
@@ -113,10 +115,17 @@ export default function BusinessSolutions() {
               <BrandName /> works alongside business leaders to turn complex questions into clear choices, shared direction, and executable plans. We bridge strategy, structure, delivery, and culture to build resilient, high-trust organizations.
             </p>
           </Reveal>
-          <Reveal className="about-visual-placeholder page-visual-placeholder landscape-placeholder">
-            <span>LANDSCAPE PLACEHOLDER</span>
-            <strong>Connecting vision with operational excellence.</strong>
-            <small>Suggested resolution: 16:9 · 1920x1080 px (Corporate strategy & transformation)</small>
+          <Reveal className="about-visual-card">
+            <ImageCard
+              src={galleryImages[5].src}
+              alt="SAMFI Enterprise Solutions Architecture and Strategy Briefing"
+              aspectRatio="16 / 9"
+              className="about-purpose-image"
+            >
+              <div className="about-image-overlay">
+                <strong>Connecting vision with operational excellence.</strong>
+              </div>
+            </ImageCard>
           </Reveal>
         </div>
       </section>

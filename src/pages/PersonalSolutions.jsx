@@ -12,8 +12,10 @@ import {
 } from "lucide-react";
 import { Header, Footer, SocialDock } from "../components/Layout";
 import Reveal from "../components/Reveal";
+import ImageCard from "../components/ImageCard";
 import { BrandName } from "../components/BrandName";
 import { ServicePlanet } from "../components/ServicePlanet";
+import { galleryImages } from "../data/gallery";
 
 const services = [
   {
@@ -107,10 +109,17 @@ export default function PersonalSolutions() {
               Personal growth is not about pushing harder. <BrandName /> creates a considered, confidential space to recognize what is getting in the way, clear the mental noise, and build the self-awareness and agency needed to move forward with confidence.
             </p>
           </Reveal>
-          <Reveal className="about-visual-placeholder page-visual-placeholder landscape-placeholder">
-            <span>LANDSCAPE PLACEHOLDER</span>
-            <strong>Grounded, capable, and purpose-driven growth.</strong>
-            <small>Suggested resolution: 16:9 · 1920x1080 px (Personal wellbeing & guidance)</small>
+          <Reveal className="about-visual-card">
+            <ImageCard
+              src={galleryImages[1].src}
+              alt="SAMFI Leadership Cohort and Collaborative Session"
+              aspectRatio="16 / 9"
+              className="about-purpose-image"
+            >
+              <div className="about-image-overlay">
+                <strong>Grounded, capable, and purpose-driven growth.</strong>
+              </div>
+            </ImageCard>
           </Reveal>
         </div>
       </section>

@@ -3,6 +3,8 @@ import { ArrowUpRight, Check } from 'lucide-react'
 import { Header, Footer, SocialDock } from '../components/Layout'
 import { renderBrandName } from '../components/BrandName'
 import Reveal from '../components/Reveal'
+import ImageCard from '../components/ImageCard'
+import { galleryImages } from '../data/gallery'
 import PersonalSolutions from './PersonalSolutions'
 import BusinessSolutions from './BusinessSolutions'
 import TrainingSolutions from './TrainingSolutions'
@@ -110,10 +112,17 @@ export default function SectorPage({ sector: s }) {
       </motion.section>
 
       <section className="sector-story">
-        <Reveal className="sector-image-placeholder">
-          <span>PORTRAIT / LANDSCAPE PLACEHOLDER</span>
-          <strong>{s.imageLabel}</strong>
-          <small>Suggested resolution: 16:9 · 1920x1080 px or 4:5 · 1200x1500 px</small>
+        <Reveal className="sector-image-card-wrap">
+          <ImageCard
+            src={galleryImages[3].src}
+            alt={s.imageLabel || "SAMFI Strategic Advisory & Field Review"}
+            aspectRatio="16 / 9"
+            className="sector-story-image"
+          >
+            <div className="about-image-overlay">
+              <strong>{s.imageLabel}</strong>
+            </div>
+          </ImageCard>
         </Reveal>
         <Reveal className="story-copy" delay={0.15}>
           <p className="eyebrow">Clean and elevate</p>
@@ -143,9 +152,13 @@ export default function SectorPage({ sector: s }) {
         <Reveal>
           <p className="eyebrow">A place for your story</p>
           <h2>What could change<br /><em>with the right support?</em></h2>
-          <div className="case-image-placeholder">
-            <span>LANDSCAPE PLACEHOLDER</span>
-            <small>Wide 16:9 project or programme image (1920x1080 px)</small>
+          <div className="case-image-card-wrap">
+            <ImageCard
+              src={galleryImages[6].src}
+              alt="SAMFI Stakeholder Conference & Industry Forum"
+              aspectRatio="16 / 9"
+              className="case-strip-image"
+            />
           </div>
           <a className="dark-button" href="#contact">
             Talk to our team <ArrowUpRight size={17} />

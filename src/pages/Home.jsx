@@ -1,11 +1,16 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { useEffect, useRef } from 'react'
-import { motion } from 'framer-motion'
-import { ArrowUpRight } from 'lucide-react'
+import { useState, useEffect, useRef } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ArrowUpRight, Play, Maximize2, X, ChevronLeft, ChevronRight } from 'lucide-react'
 import { sectors } from '../data/sectors'
 import { Header, Footer, SocialDock } from '../components/Layout'
 import { BrandName } from '../components/BrandName'
-import goldLogo from '../assets/samfi-gold-logo.png'
+import ImageCard from '../components/ImageCard'
+import { galleryImages } from '../data/gallery'
+import { galleryVideos } from '../data/videos'
+
+const goldLogo =
+  "https://res.cloudinary.com/iiww9i7d/image/upload/f_auto,q_auto,w_360,c_limit/v1788152477/samfi-gold-logo.png";
 
 const planetAppearance = {
   "/services/personal-solutions": {
@@ -43,59 +48,67 @@ const heroPlanets = sectors.map((sector) => ({
   ...planetAppearance[sector.slug],
 }));
 
+// Curated featured media sequence referencing existing centralized gallery data
+const featuredMedia = [
+  {
+    id: 'film-1',
+    type: 'image',
+    data: galleryImages[5], // Enterprise Solutions Architecture (4:3, landscape)
+  },
+  {
+    id: 'film-2',
+    type: 'image',
+    data: galleryImages[0], // Executive Training & Engagement (3:4, portrait)
+  },
+  {
+    id: 'film-3',
+    type: 'video',
+    data: galleryVideos[4], // Leadership training program (9:16, portrait video)
+  },
+  {
+    id: 'film-4',
+    type: 'image',
+    data: galleryImages[4], // Project Collaboration & Review (4:3, landscape)
+  },
+  {
+    id: 'film-5',
+    type: 'video',
+    data: galleryVideos[0], // Excessive doubt - control your mind (9:16, portrait video)
+  },
+  {
+    id: 'film-6',
+    type: 'image',
+    data: galleryImages[2], // Operations & On-Site Consultation (20:9, panoramic)
+  },
+];
+
 export default function Home() {
   const navigate = useNavigate();
-  const carouselRef = useRef(null);
-  const galleryItems = [
-    ['Image', 'People, purpose and progress'], ['Video', 'Ideas in motion'],
-    ['Image', 'Learning in action'], ['Video', 'Stories worth sharing'],
-  ];
+  const trackRef = useRef(null);
+  const [selectedVideo, setSelectedVideo] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
 
+  const scrollFilmstrip = (direction) => {
+    if (!trackRef.current) return;
+    const scrollAmount = trackRef.current.clientWidth * 0.7;
+    trackRef.current.scrollBy({
+      left: direction === 'left' ? -scrollAmount : scrollAmount,
+      behavior: 'smooth',
+    });
+  };
+
+  // Close modal on Escape key press
   useEffect(() => {
-    const carousel = carouselRef.current;
-    if (!carousel || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
-    let dragging = false;
-    let startX = 0;
-    let startScroll = 0;
-    const loopWidth = () => carousel.scrollWidth / 3;
-    const keepInLoop = () => {
-      const width = loopWidth();
-      if (carousel.scrollLeft >= width * 2) carousel.scrollLeft -= width;
-      if (carousel.scrollLeft <= 0) carousel.scrollLeft += width;
+    if (!selectedVideo && !selectedImage) return;
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        setSelectedVideo(null);
+        setSelectedImage(null);
+      }
     };
-    const advance = () => {
-      if (dragging) return;
-      const slide = carousel.querySelector('.gallery-slide');
-      const step = slide ? slide.offsetWidth + 20 : 0;
-      const width = loopWidth();
-      if (carousel.scrollLeft + step >= width * 2) carousel.scrollLeft -= width;
-      carousel.scrollBy({ left: step, behavior: 'smooth' });
-    };
-    const onPointerDown = (event) => {
-      dragging = true; startX = event.clientX; startScroll = carousel.scrollLeft;
-      carousel.setPointerCapture(event.pointerId); carousel.classList.add('is-dragging');
-    };
-    const onPointerMove = (event) => {
-      if (!dragging) return;
-      carousel.scrollLeft = startScroll - (event.clientX - startX); keepInLoop();
-    };
-    const onPointerUp = (event) => {
-      dragging = false; carousel.releasePointerCapture?.(event.pointerId); carousel.classList.remove('is-dragging');
-    };
-    carousel.scrollLeft = loopWidth();
-    const timer = window.setInterval(advance, 5000);
-    carousel.addEventListener('pointerdown', onPointerDown);
-    carousel.addEventListener('pointermove', onPointerMove);
-    carousel.addEventListener('pointerup', onPointerUp);
-    carousel.addEventListener('pointercancel', onPointerUp);
-    return () => {
-      window.clearInterval(timer);
-      carousel.removeEventListener('pointerdown', onPointerDown);
-      carousel.removeEventListener('pointermove', onPointerMove);
-      carousel.removeEventListener('pointerup', onPointerUp);
-      carousel.removeEventListener('pointercancel', onPointerUp);
-    };
-  }, []);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [selectedVideo, selectedImage]);
 
   return (
     <main className="home-page">
@@ -223,24 +236,200 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Curated Mixed-Media Film-Strip Showcase */}
       <section className="home-gallery">
         <div className="home-gallery-heading">
-          <div>
-            <h2>Gallery</h2>
-            <p className="section-tagline">Moments that move us forward.</p>
+          <h2>Gallery</h2>
+          <div className="home-gallery-actions">
+            <div className="filmstrip-controls" aria-label="Gallery navigation controls">
+              <button
+                type="button"
+                className="filmstrip-nav-btn"
+                onClick={() => scrollFilmstrip('left')}
+                aria-label="Scroll left"
+              >
+                <ChevronLeft size={20} />
+              </button>
+              <button
+                type="button"
+                className="filmstrip-nav-btn"
+                onClick={() => scrollFilmstrip('right')}
+                aria-label="Scroll right"
+              >
+                <ChevronRight size={20} />
+              </button>
+            </div>
+            <Link className="home-link" to="/gallery">
+              View all <ArrowUpRight size={17} />
+            </Link>
           </div>
-          <Link className="home-link" to="/gallery">Show more <ArrowUpRight size={17} /></Link>
         </div>
-        <div className="gallery-carousel" ref={carouselRef} aria-label="Gallery preview">
-          {[...galleryItems, ...galleryItems, ...galleryItems].map(([type, title], index) => (
-            <article className={`gallery-slide gallery-slide-${(index % galleryItems.length) + 1}`} key={`${title}-${index}`}>
-              <span>{type} · 0{index + 1}</span>
-              {type === 'Video' && <i className="gallery-play">▶</i>}
-              <strong>{title}</strong>
-            </article>
-          ))}
+
+        <div className="home-filmstrip-wrapper">
+          <div className="home-filmstrip-track" ref={trackRef} aria-label="Curated media film strip">
+            {featuredMedia.map((item) => {
+              if (item.type === 'video') {
+                const video = item.data;
+                return (
+                  <div
+                    key={item.id}
+                    className="filmstrip-card filmstrip-video-card"
+                    style={{ aspectRatio: video.aspectRatio || '9 / 16' }}
+                    onClick={() => setSelectedVideo(video)}
+                    role="button"
+                    tabIndex={0}
+                    aria-label={`Play video: ${video.title}`}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        setSelectedVideo(video);
+                      }
+                    }}
+                  >
+                    <img
+                      src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`}
+                      alt={video.title}
+                      loading="lazy"
+                      decoding="async"
+                      className="filmstrip-thumb"
+                    />
+                    <div className="video-card-play-btn" aria-hidden="true">
+                      <Play size={22} className="play-icon" />
+                    </div>
+                    <div className="video-card-overlay">
+                      <p className="video-card-title">{video.title}</p>
+                    </div>
+                  </div>
+                );
+              }
+
+              const image = item.data;
+              return (
+                <div
+                  key={item.id}
+                  className="filmstrip-card filmstrip-image-card"
+                  style={{ aspectRatio: image.aspectRatio || '4 / 3' }}
+                  onClick={() => setSelectedImage(image)}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`View photograph: ${image.title || image.alt}`}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      setSelectedImage(image);
+                    }
+                  }}
+                >
+                  <ImageCard
+                    src={image.src}
+                    alt={image.alt}
+                    aspectRatio={image.aspectRatio}
+                    className="filmstrip-image-card-inner"
+                  >
+                    <div className="gallery-item-overlay">
+                      <div className="gallery-item-overlay-content">
+                        <p className="gallery-item-title">{image.title || image.alt}</p>
+                        <div className="gallery-item-zoom" aria-hidden="true">
+                          <Maximize2 size={18} />
+                        </div>
+                      </div>
+                    </div>
+                  </ImageCard>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </section>
+
+      {/* Video Modal Player (Loads YouTube iframe ONLY when active) */}
+      <AnimatePresence>
+        {selectedVideo && (
+          <motion.div
+            className="gallery-lightbox-backdrop gallery-video-modal-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={() => setSelectedVideo(null)}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Video player modal"
+          >
+            <div className="gallery-lightbox-topbar" onClick={(e) => e.stopPropagation()}>
+              <div className="gallery-lightbox-counter">Featured Video</div>
+              <button
+                type="button"
+                className="gallery-lightbox-btn"
+                onClick={() => setSelectedVideo(null)}
+                aria-label="Close video player"
+              >
+                <X size={22} />
+              </button>
+            </div>
+
+            <div className="gallery-lightbox-content" onClick={(e) => e.stopPropagation()}>
+              <div className="gallery-video-player-container is-short-player">
+                <iframe
+                  key={selectedVideo.id}
+                  src={`https://www.youtube-nocookie.com/embed/${selectedVideo.id}?autoplay=1&rel=0&playsinline=1&modestbranding=1`}
+                  title={selectedVideo.title}
+                  className="gallery-video-iframe"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              </div>
+            </div>
+
+            <div className="gallery-lightbox-bottombar" onClick={(e) => e.stopPropagation()}>
+              <h2 className="gallery-lightbox-title">{selectedVideo.title}</h2>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Image Lightbox Modal */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            className="gallery-lightbox-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={() => setSelectedImage(null)}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Image preview modal"
+          >
+            <div className="gallery-lightbox-topbar" onClick={(e) => e.stopPropagation()}>
+              <div className="gallery-lightbox-counter">Featured Photograph</div>
+              <button
+                type="button"
+                className="gallery-lightbox-btn"
+                onClick={() => setSelectedImage(null)}
+                aria-label="Close photograph view"
+              >
+                <X size={22} />
+              </button>
+            </div>
+
+            <div className="gallery-lightbox-content" onClick={(e) => e.stopPropagation()}>
+              <div className="gallery-lightbox-image-container">
+                <img
+                  src={selectedImage.fullSrc || selectedImage.src}
+                  alt={selectedImage.alt}
+                  className="gallery-lightbox-image"
+                />
+              </div>
+            </div>
+
+            <div className="gallery-lightbox-bottombar" onClick={(e) => e.stopPropagation()}>
+              <h2 className="gallery-lightbox-title">{selectedImage.title || selectedImage.alt}</h2>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <section className="home-about home-why">
         <div className="home-about-content">

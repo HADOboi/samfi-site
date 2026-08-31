@@ -16,10 +16,16 @@ import { Header, Footer, SocialDock } from "../components/Layout";
 import ImageCard from "../components/ImageCard";
 import Reveal from "../components/Reveal";
 import { BrandName } from "../components/BrandName";
-import logo from "../assets/samfi-gold-head-logo.png";
-import ignetseal from "../assets/ignet-seal.png";
-import isoseal from "../assets/iso-seal.png";
-import ignetCertification from "../assets/ignet-certification.png";
+import { galleryImages } from "../data/gallery";
+
+const logo =
+  "https://res.cloudinary.com/iiww9i7d/image/upload/f_auto,q_auto,w_240,c_limit/v1788152477/samfi-gold-head-logo.png";
+const ignetseal =
+  "https://res.cloudinary.com/iiww9i7d/image/upload/f_auto,q_auto,w_200,c_limit/v1788152476/ignet-seal.png";
+const isoseal =
+  "https://res.cloudinary.com/iiww9i7d/image/upload/f_auto,q_auto,w_200,c_limit/v1788152476/iso-seal.png";
+const ignetCertification =
+  "https://res.cloudinary.com/iiww9i7d/image/upload/f_auto,q_auto,w_1000,c_limit/v1788087504/ignet-certification.png";
 
 const values = [
   [
@@ -83,16 +89,18 @@ export default function About() {
   };
 
   useEffect(() => {
+    let timer;
     if (hash) {
       const targetEl = document.querySelector(hash);
       if (targetEl) {
-        setTimeout(() => {
+        timer = setTimeout(() => {
           targetEl.scrollIntoView({ behavior: "smooth" });
         }, 120);
       }
     } else {
       window.scrollTo(0, 0);
     }
+    return () => clearTimeout(timer);
   }, [hash]);
 
   return (
@@ -144,26 +152,34 @@ export default function About() {
               and digital innovation.
             </p>
           </Reveal>
-          <Reveal className="about-visual-placeholder page-visual-placeholder landscape-placeholder">
-            <span>LANDSCAPE PLACEHOLDER</span>
-            <strong>Growth is never a solo journey.</strong>
-            <small>
-              Suggested resolution: 16:9 · 1920x1080 px (Intergenerational
-              workshop)
-            </small>
+          <Reveal className="about-visual-card">
+            <ImageCard
+              src={galleryImages[7].src}
+              alt="SAMFI Interactive Workshop and Discussion Forum"
+              aspectRatio="16 / 9"
+              className="about-purpose-image"
+            >
+              <div className="about-image-overlay">
+                <strong>Growth is never a solo journey.</strong>
+              </div>
+            </ImageCard>
           </Reveal>
         </div>
       </section>
 
       <section id="mission" className="about-purpose-section about-mission">
         <div className="about-purpose-container reverse">
-          <Reveal className="about-visual-placeholder page-visual-placeholder landscape-placeholder">
-            <span>LANDSCAPE PLACEHOLDER</span>
-            <strong>Potential, turned into purposeful progress.</strong>
-            <small>
-              Suggested resolution: 16:9 · 1920x1080 px (Collaborative strategy
-              session)
-            </small>
+          <Reveal className="about-visual-card">
+            <ImageCard
+              src={galleryImages[4].src}
+              alt="SAMFI Strategic Project Collaboration & Assembly"
+              aspectRatio="16 / 9"
+              className="about-purpose-image"
+            >
+              <div className="about-image-overlay">
+                <strong>Potential, turned into purposeful progress.</strong>
+              </div>
+            </ImageCard>
           </Reveal>
           <Reveal className="purpose-card purpose-card-mission">
             <p className="eyebrow">Our mission</p>
@@ -241,24 +257,31 @@ export default function About() {
         </div>
         <Reveal className="certification-visual">
           <ImageCard
-            src="https://res.cloudinary.com/iiww9i7d/image/upload/f_auto,q_auto,w_714/v1788087504/ignet-certification.png"
-            alt="IGNET certification"
+            src={ignetCertification}
+            alt="IGNET Certificate of Affiliation - ISO 9001:2015"
+            aspectRatio="1.414 / 1"
+            priority={true}
+            className="certification-card"
           />
         </Reveal>
       </section>
 
       <section className="about-team">
-        <Reveal className="team-visual page-visual-placeholder landscape-placeholder">
-          <span>LANDSCAPE PLACEHOLDER</span>
-          <strong>
-            Many disciplines.
-            <br />
-            One shared standard.
-          </strong>
-          <small>
-            Suggested resolution: 16:9 · 1920x1080 px (Multidisciplinary working
-            session)
-          </small>
+        <Reveal className="team-visual-card">
+          <ImageCard
+            src={galleryImages[8].src}
+            alt="SAMFI Multidisciplinary Team & Milestone Assembly"
+            aspectRatio="16 / 9"
+            className="about-purpose-image"
+          >
+            <div className="about-image-overlay">
+              <strong>
+                Many disciplines.
+                <br />
+                One shared standard.
+              </strong>
+            </div>
+          </ImageCard>
         </Reveal>
         <div className="team-copy">
           <Reveal>

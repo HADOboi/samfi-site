@@ -18,10 +18,13 @@ import {
 } from "react-icons/fa6";
 import { useEffect, useRef, useState } from "react";
 import { useLenis } from "lenis/react";
-import blacklogo from "../assets/samfi-black-logo.png";
-import goldLogo from "../assets/samfi-gold-logo.png";
 import { BrandName } from "./BrandName";
 import { sectors } from "../data/sectors";
+
+const blacklogo =
+  "https://res.cloudinary.com/iiww9i7d/image/upload/f_auto,q_auto,w_360,c_limit/v1788152476/samfi-black-logo.png";
+const goldLogo =
+  "https://res.cloudinary.com/iiww9i7d/image/upload/f_auto,q_auto,w_360,c_limit/v1788152477/samfi-gold-logo.png";
 
 export function Header() {
   const [open, setOpen] = useState(false);

@@ -12,8 +12,10 @@ import {
 } from "lucide-react";
 import { Header, Footer, SocialDock } from "../components/Layout";
 import Reveal from "../components/Reveal";
+import ImageCard from "../components/ImageCard";
 import { BrandName } from "../components/BrandName";
 import { ServicePlanet } from "../components/ServicePlanet";
+import { galleryImages } from "../data/gallery";
 
 const services = [
   {
@@ -107,10 +109,17 @@ export default function DigitalSolutions() {
               Technology should be an accelerator, not a barrier. <BrandName /> combines strategic clarity, sleek design, and robust architecture to deliver digital products that make an immediate impact and scale effortlessly over time.
             </p>
           </Reveal>
-          <Reveal className="about-visual-placeholder page-visual-placeholder landscape-placeholder">
-            <span>LANDSCAPE PLACEHOLDER</span>
-            <strong>Connecting human intent with digital capability.</strong>
-            <small>Suggested resolution: 16:9 · 1920x1080 px (Digital transformation & software development)</small>
+          <Reveal className="about-visual-card">
+            <ImageCard
+              src={galleryImages[2].src}
+              alt="SAMFI Operations, Digital Consultation and Technical Briefing"
+              aspectRatio="16 / 9"
+              className="about-purpose-image"
+            >
+              <div className="about-image-overlay">
+                <strong>Connecting human intent with digital capability.</strong>
+              </div>
+            </ImageCard>
           </Reveal>
         </div>
       </section>
