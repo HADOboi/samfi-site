@@ -155,8 +155,12 @@ export default function Gallery() {
       <SocialDock />
 
       {/* Simple Heading Section */}
-      <header className="gallery-simple-header pt-32 pb-10 text-center">
-        <h1 className="text-4xl md:text-5xl font-bold tracking-tight">Gallery</h1>
+      <header className="gallery-simple-header pt-32 pb-4">
+        <div className="gallery-section-heading">
+          <Reveal>
+            <h1>Gallery</h1>
+          </Reveal>
+        </div>
       </header>
 
       {/* Images Section */}
