@@ -42,22 +42,6 @@ export const galleryImages = [
     aspectRatio: "200 / 90",
   },
   {
-    id: "gallery-5",
-    src: getOptimizedUrl("https://res.cloudinary.com/iiww9i7d/image/upload/v1788159986/IMG_6674.jpg", 600),
-    fullSrc: getOptimizedUrl("https://res.cloudinary.com/iiww9i7d/image/upload/v1788159986/IMG_6674.jpg", 1400),
-    alt: "Project Collaboration and Strategy Assembly",
-    title: "Project Collaboration & Review",
-    aspectRatio: "200 / 150",
-  },
-  {
-    id: "gallery-6",
-    src: getOptimizedUrl("https://res.cloudinary.com/iiww9i7d/image/upload/v1788159965/IMG_6778.jpg", 600),
-    fullSrc: getOptimizedUrl("https://res.cloudinary.com/iiww9i7d/image/upload/v1788159965/IMG_6778.jpg", 1400),
-    alt: "Enterprise Architecture Presentation",
-    title: "Enterprise Solutions Architecture",
-    aspectRatio: "200 / 150",
-  },
-  {
     id: "gallery-7",
     src: getOptimizedUrl("https://res.cloudinary.com/iiww9i7d/image/upload/v1788159947/IMG20260512101256.jpg", 600),
     fullSrc: getOptimizedUrl("https://res.cloudinary.com/iiww9i7d/image/upload/v1788159947/IMG20260512101256.jpg", 1400),
@@ -80,6 +64,22 @@ export const galleryImages = [
     alt: "Corporate Milestone & Project Assembly",
     title: "Milestone Celebration & Assembly",
     aspectRatio: "200 / 113",
+  },
+  {
+    id: "gallery-5",
+    src: getOptimizedUrl("https://res.cloudinary.com/iiww9i7d/image/upload/v1788271374/BsnsMtng_1.png", 600),
+    fullSrc: getOptimizedUrl("https://res.cloudinary.com/iiww9i7d/image/upload/v1788271374/BsnsMtng_1.png", 1400),
+    alt: "Project Collaboration and Strategy Assembly",
+    title: "Project Collaboration & Review",
+    aspectRatio: "200 / 150",
+  },
+  {
+    id: "gallery-6",
+    src: getOptimizedUrl("https://res.cloudinary.com/iiww9i7d/image/upload/v1788271374/BsnsMtng_2.png", 600),
+    fullSrc: getOptimizedUrl("https://res.cloudinary.com/iiww9i7d/image/upload/v1788271374/BsnsMtng_2.png", 1400),
+    alt: "Enterprise Architecture Presentation",
+    title: "Enterprise Solutions Architecture",
+    aspectRatio: "200 / 150",
   },
 ];
 

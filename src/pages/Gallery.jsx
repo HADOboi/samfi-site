@@ -280,20 +280,27 @@ export default function Gallery() {
                 <ChevronLeft size={28} />
               </button>
 
-              {/* Centered Image */}
-              <div className="gallery-lightbox-image-container">
-                <AnimatePresence mode="wait">
-                  <motion.img
-                    key={currentImage.fullSrc || currentImage.src}
-                    src={currentImage.fullSrc || currentImage.src}
-                    alt={currentImage.alt}
-                    className="gallery-lightbox-image"
-                    initial={{ opacity: 0, scale: 0.96 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.96 }}
-                    transition={{ duration: 0.18, ease: "easeOut" }}
-                  />
-                </AnimatePresence>
+              {/* Centered Media & Title Wrapper */}
+              <div className="gallery-lightbox-media-wrapper">
+                <div className="gallery-lightbox-image-container">
+                  <AnimatePresence mode="wait">
+                    <motion.img
+                      key={currentImage.fullSrc || currentImage.src}
+                      src={currentImage.fullSrc || currentImage.src}
+                      alt={currentImage.alt}
+                      className="gallery-lightbox-image"
+                      initial={{ opacity: 0, scale: 0.96 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.96 }}
+                      transition={{ duration: 0.18, ease: "easeOut" }}
+                    />
+                  </AnimatePresence>
+                </div>
+
+                {/* Title Caption directly beneath the image */}
+                <div className="gallery-lightbox-bottombar">
+                  <h2 className="gallery-lightbox-title">{currentImage.title || currentImage.alt}</h2>
+                </div>
               </div>
 
               {/* Next Button */}
@@ -308,14 +315,6 @@ export default function Gallery() {
               >
                 <ChevronRight size={28} />
               </button>
-            </div>
-
-            {/* Bottom Bar: Title Caption */}
-            <div
-              className="gallery-lightbox-bottombar"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <h2 className="gallery-lightbox-title">{currentImage.title || currentImage.alt}</h2>
             </div>
           </motion.div>
         )}
@@ -375,20 +374,27 @@ export default function Gallery() {
                 <ChevronLeft size={28} />
               </button>
 
-              {/* Video Player Container with Proper Aspect Ratio */}
-              <div
-                className={`gallery-video-player-container ${
-                  currentVideo.type === "short" ? "is-short-player" : "is-landscape-player"
-                }`}
-              >
-                <iframe
-                  key={currentVideo.id}
-                  src={`https://www.youtube-nocookie.com/embed/${currentVideo.id}?autoplay=1&rel=0&playsinline=1&modestbranding=1`}
-                  title={currentVideo.title}
-                  className="gallery-video-iframe"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                />
+              {/* Centered Video Media & Title Wrapper */}
+              <div className="gallery-lightbox-media-wrapper">
+                <div
+                  className={`gallery-video-player-container ${
+                    currentVideo.type === "short" ? "is-short-player" : "is-landscape-player"
+                  }`}
+                >
+                  <iframe
+                    key={currentVideo.id}
+                    src={`https://www.youtube-nocookie.com/embed/${currentVideo.id}?autoplay=1&rel=0&playsinline=1&modestbranding=1`}
+                    title={currentVideo.title}
+                    className="gallery-video-iframe"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  />
+                </div>
+
+                {/* Title Caption directly beneath the video */}
+                <div className="gallery-lightbox-bottombar">
+                  <h2 className="gallery-lightbox-title">{currentVideo.title}</h2>
+                </div>
               </div>
 
               {/* Next Button */}
@@ -403,14 +409,6 @@ export default function Gallery() {
               >
                 <ChevronRight size={28} />
               </button>
-            </div>
-
-            {/* Bottom Bar: Title Caption */}
-            <div
-              className="gallery-lightbox-bottombar"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <h2 className="gallery-lightbox-title">{currentVideo.title}</h2>
             </div>
           </motion.div>
         )}

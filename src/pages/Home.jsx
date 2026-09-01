@@ -369,20 +369,22 @@ export default function Home() {
             </div>
 
             <div className="gallery-lightbox-content" onClick={(e) => e.stopPropagation()}>
-              <div className="gallery-video-player-container is-short-player">
-                <iframe
-                  key={selectedVideo.id}
-                  src={`https://www.youtube-nocookie.com/embed/${selectedVideo.id}?autoplay=1&rel=0&playsinline=1&modestbranding=1`}
-                  title={selectedVideo.title}
-                  className="gallery-video-iframe"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                />
-              </div>
-            </div>
+              <div className="gallery-lightbox-media-wrapper">
+                <div className="gallery-video-player-container is-short-player">
+                  <iframe
+                    key={selectedVideo.id}
+                    src={`https://www.youtube-nocookie.com/embed/${selectedVideo.id}?autoplay=1&rel=0&playsinline=1&modestbranding=1`}
+                    title={selectedVideo.title}
+                    className="gallery-video-iframe"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  />
+                </div>
 
-            <div className="gallery-lightbox-bottombar" onClick={(e) => e.stopPropagation()}>
-              <h2 className="gallery-lightbox-title">{selectedVideo.title}</h2>
+                <div className="gallery-lightbox-bottombar">
+                  <h2 className="gallery-lightbox-title">{selectedVideo.title}</h2>
+                </div>
+              </div>
             </div>
           </motion.div>
         )}
@@ -415,17 +417,19 @@ export default function Home() {
             </div>
 
             <div className="gallery-lightbox-content" onClick={(e) => e.stopPropagation()}>
-              <div className="gallery-lightbox-image-container">
-                <img
-                  src={selectedImage.fullSrc || selectedImage.src}
-                  alt={selectedImage.alt}
-                  className="gallery-lightbox-image"
-                />
-              </div>
-            </div>
+              <div className="gallery-lightbox-media-wrapper">
+                <div className="gallery-lightbox-image-container">
+                  <img
+                    src={selectedImage.fullSrc || selectedImage.src}
+                    alt={selectedImage.alt}
+                    className="gallery-lightbox-image"
+                  />
+                </div>
 
-            <div className="gallery-lightbox-bottombar" onClick={(e) => e.stopPropagation()}>
-              <h2 className="gallery-lightbox-title">{selectedImage.title || selectedImage.alt}</h2>
+                <div className="gallery-lightbox-bottombar">
+                  <h2 className="gallery-lightbox-title">{selectedImage.title || selectedImage.alt}</h2>
+                </div>
+              </div>
             </div>
           </motion.div>
         )}
