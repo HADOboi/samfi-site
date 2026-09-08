@@ -154,7 +154,7 @@ export default function About() {
           </Reveal>
           <Reveal className="about-visual-card">
             <ImageCard
-              src={galleryImages[7].src}
+              src={galleryImages[5].src}
               alt="SAMFI Interactive Workshop and Discussion Forum"
               aspectRatio="16 / 9"
               className="about-purpose-image"
@@ -269,7 +269,7 @@ export default function About() {
       <section className="about-team">
         <Reveal className="team-visual-card">
           <ImageCard
-            src={galleryImages[8].src}
+            src={galleryImages[6].src}
             alt="SAMFI Multidisciplinary Team & Milestone Assembly"
             aspectRatio="16 / 9"
             className="about-purpose-image"

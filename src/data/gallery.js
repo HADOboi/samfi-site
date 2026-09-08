@@ -65,22 +65,6 @@ export const galleryImages = [
     title: "Milestone Celebration & Assembly",
     aspectRatio: "200 / 113",
   },
-  {
-    id: "gallery-5",
-    src: getOptimizedUrl("https://res.cloudinary.com/iiww9i7d/image/upload/v1788271374/BsnsMtng_1.png", 600),
-    fullSrc: getOptimizedUrl("https://res.cloudinary.com/iiww9i7d/image/upload/v1788271374/BsnsMtng_1.png", 1400),
-    alt: "Project Collaboration and Strategy Assembly",
-    title: "Project Collaboration & Review",
-    aspectRatio: "200 / 150",
-  },
-  {
-    id: "gallery-6",
-    src: getOptimizedUrl("https://res.cloudinary.com/iiww9i7d/image/upload/v1788271374/BsnsMtng_2.png", 600),
-    fullSrc: getOptimizedUrl("https://res.cloudinary.com/iiww9i7d/image/upload/v1788271374/BsnsMtng_2.png", 1400),
-    alt: "Enterprise Architecture Presentation",
-    title: "Enterprise Solutions Architecture",
-    aspectRatio: "200 / 150",
-  },
 ];
 
 

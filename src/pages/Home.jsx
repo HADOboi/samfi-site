@@ -53,7 +53,7 @@ const featuredMedia = [
   {
     id: 'film-1',
     type: 'image',
-    data: galleryImages[5], // Enterprise Solutions Architecture (4:3, landscape)
+    data: galleryImages[5], // Interactive Workshop Forum (landscape)
   },
   {
     id: 'film-2',
@@ -68,7 +68,7 @@ const featuredMedia = [
   {
     id: 'film-4',
     type: 'image',
-    data: galleryImages[4], // Project Collaboration & Review (4:3, landscape)
+    data: galleryImages[4], // Stakeholder Conference & Seminar (landscape)
   },
   {
     id: 'film-5',

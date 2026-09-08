@@ -118,7 +118,7 @@ export default function BusinessSolutions() {
           <Reveal className="about-visual-card">
             <ImageCard
               src={galleryImages[5].src}
-              alt="SAMFI Enterprise Solutions Architecture and Strategy Briefing"
+              alt="SAMFI Interactive Workshop and Strategy Forum"
               aspectRatio="16 / 9"
               className="about-purpose-image"
             >
