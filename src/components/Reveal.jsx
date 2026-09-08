@@ -1,31 +1,25 @@
-import { useLayoutEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-gsap.registerPlugin(ScrollTrigger);
-export default function Reveal({ children, className = "", delay = 0, y = 28, duration = 0.85 }) {
-  const ref = useRef();
-  useLayoutEffect(() => {
-    const ctx = gsap.context(
-      () =>
-        gsap.fromTo(
-          ref.current,
-          { opacity: 0, y },
-          {
-            opacity: 1,
-            y: 0,
-            duration,
-            delay,
-            ease: "power3.out",
-            scrollTrigger: { trigger: ref.current, start: "top 88%" },
-          },
-        ),
-      ref,
-    );
-    return () => ctx.revert();
-  }, []);
+import { motion } from "framer-motion";
+
+export default function Reveal({
+  children,
+  className = "",
+  delay = 0,
+  y = 28,
+  duration = 0.85,
+}) {
   return (
-    <div ref={ref} className={className}>
+    <motion.div
+      className={className}
+      initial={{ opacity: 0, y }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.12 }}
+      transition={{
+        duration,
+        delay,
+        ease: [0.16, 1, 0.3, 1],
+      }}
+    >
       {children}
-    </div>
+    </motion.div>
   );
 }

@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowUpRight, Check } from 'lucide-react'
 import { Header, Footer, SocialDock } from '../components/Layout'
@@ -5,10 +6,12 @@ import { renderBrandName } from '../components/BrandName'
 import Reveal from '../components/Reveal'
 import ImageCard from '../components/ImageCard'
 import { galleryImages } from '../data/gallery'
-import PersonalSolutions from './PersonalSolutions'
-import BusinessSolutions from './BusinessSolutions'
-import TrainingSolutions from './TrainingSolutions'
-import DigitalSolutions from './DigitalSolutions'
+import { PageSkeleton } from '../components/PageSkeleton'
+
+const PersonalSolutions = lazy(() => import('./PersonalSolutions'))
+const BusinessSolutions = lazy(() => import('./BusinessSolutions'))
+const TrainingSolutions = lazy(() => import('./TrainingSolutions'))
+const DigitalSolutions = lazy(() => import('./DigitalSolutions'))
 
 const solutionDetails = [
   'Purposeful, fast websites that turn your story, service or platform into an experience people want to use.',
@@ -82,10 +85,10 @@ function SolutionsPage({ sector: s }) {
 }
 
 export default function SectorPage({ sector: s }) {
-  if (s.slug === '/services/personal-solutions') return <PersonalSolutions />
-  if (s.slug === '/services/business-solutions') return <BusinessSolutions />
-  if (s.slug === '/services/training-solutions') return <TrainingSolutions />
-  if (s.slug === '/services/digital-solutions') return <DigitalSolutions />
+  if (s.slug === '/services/personal-solutions') return <Suspense fallback={<PageSkeleton />}><PersonalSolutions /></Suspense>
+  if (s.slug === '/services/business-solutions') return <Suspense fallback={<PageSkeleton />}><BusinessSolutions /></Suspense>
+  if (s.slug === '/services/training-solutions') return <Suspense fallback={<PageSkeleton />}><TrainingSolutions /></Suspense>
+  if (s.slug === '/services/digital-solutions') return <Suspense fallback={<PageSkeleton />}><DigitalSolutions /></Suspense>
   if (s.template === 'solutions') return <SolutionsPage sector={s} />
 
   const Icon = s.icon

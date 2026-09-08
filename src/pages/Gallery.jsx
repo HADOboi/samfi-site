@@ -23,14 +23,6 @@ export default function Gallery() {
   const isVideoOpen = selectedVideoIndex !== null;
   const currentVideo = isVideoOpen ? galleryVideos[selectedVideoIndex] : null;
 
-  // Preload all gallery images immediately on mount for 0ms instant display
-  useEffect(() => {
-    galleryImages.forEach((image) => {
-      const img = new Image();
-      img.src = image.src;
-    });
-  }, []);
-
   // IntersectionObserver to only load video cards when scrolling to the videos section
   useEffect(() => {
     if (!videosSectionRef.current) return;
